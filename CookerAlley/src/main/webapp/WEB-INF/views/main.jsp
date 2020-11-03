@@ -23,10 +23,8 @@
 </head>
 
 <body>
-<div>
-
 <!------------------------------ main  -->
-	<div class="container" style="width:80%;">
+	<div class="main">
 		<H3>메인 페이지</H3>
 <!------------------------------ 검색  -->
 		<form class="search" action="/thein/search.do" method="POST">
@@ -36,16 +34,28 @@
 				<option value="jung">중구</option>
 				<option value="mapo">마포구</option>
 				<option value="seodaemon">서대문구</option>
-			</select> <input type="date" name="datepick"> <input type="submit"
-				value="검색">
+			</select>
+			<input type="date" name="datepick"> <input type="submit" value="검색">
 		</form>
 <!------------------------------- instar  -->
 		<div class="instar">
 			<h3>INSTAR 부분 (3x3)</h3>
+			<div class="grid_instar">
+				<div style="border:1px solid red;">1</div>
+				<div style="border:1px solid red;">2</div>
+				<div style="border:1px solid red;">3</div>
+				
+				<div style="border:1px solid red;">4</div>
+				<div style="border:1px solid red;">5</div>
+				<div style="border:1px solid red;">6</div>
+				
+				<div style="border:1px solid red;">7</div>
+				<div style="border:1px solid red;">8</div>
+				<div style="border:1px solid red;">9</div>
+			</div>
 		</div>
 <!------------------------------- Footer  -->
 	</div>
-</div>
 </body>
 
 </html>

@@ -12,7 +12,7 @@
 </head>
 
 <body>
-<div class="grid">
+<div class="grid_menu">
 <%@ include file="Menu.jsp"%>
 <!------------------------------ main  -->
 	<div class="container">

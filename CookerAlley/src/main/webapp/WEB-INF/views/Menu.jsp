@@ -16,7 +16,7 @@
 			
 			<p>MY PAGE</p>
 			<ul>
-				<li><a href="#">회원정보</a></li>
+				<li><a href="/thein/UserInfo.do">회원정보</a></li>
 				<li><a href="#">밥상기록</a></li>
 			</ul>
 

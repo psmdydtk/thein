@@ -16,29 +16,22 @@
 <%@ include file="Menu.jsp"%>
 <!------------------------------ main  -->
 	<div class="container">
-		<H3>상세 페이지</H3>
-<!------------------------------ 검색	  -->
-<!------------------------------ list  -->
+		<H3>회원정보페이지</H3>
+<!------------------------------ info list  -->
 		<div class="list">
 		<form>
-			<H3>식당 정보</H3>
-			<c:if test="${!empty detail}">
-				<p>${detail}</p>
+			<c:if test="${!empty info}">
+				<label>아이디</label>
+				<input type="text" name="id" value="${info}" readonly="readonly" style="color: gray;">
+				<label>이름</label>
+				<input type="text" name="id" value="${info}">
+				<label>email</label>
+				<input type="text" name="id" value="${info}">
+				<label>SNS</label>
+				<input type="text" name="id" value="${info}">
+			
 			</c:if>
 		</form>
-		</div>
-<!------------------------------ hash/button  -->
-		<div class="hash">
-		<form>
-			<input type="button" value="에약">
-			<a href="" class="link">###1</a>
-			<a href="" class="link">###2</a>
-			<a href="" class="link">###3</a>
-		</form>
-		</div>
-<!------------------------------ keyword  -->
-		<div class="keyword">
-			<H3>키워드</H3>
 		</div>
 	</div>
 </div>

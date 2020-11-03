@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CookerServiceimpl implements CookerService {
+	//private CookerDao dao;
 
 	@Override
 	public String search(String loc, String date) {
@@ -15,6 +16,12 @@ public class CookerServiceimpl implements CookerService {
 	public String detail(String cooker) {
 		// TODO Auto-generated method stub
 		return "식당 : "+cooker;
+	}
+
+	@Override
+	public String info(String id) {
+		// TODO Auto-generated method stub
+		return id;
 	}
 
 }

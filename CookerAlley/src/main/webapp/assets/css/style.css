@@ -13,6 +13,12 @@ html, body {
 	margin-bottom: 3px;
 	padding:3px;
 }
+.main{
+	border:1px solid black;
+	margin:0 auto;
+	padding:10px;
+	width:80%;
+}
 .sidebar-left{
 	border:1px solid red;
 	float:left;
@@ -27,7 +33,14 @@ html, body {
 	padding:10px;
 	
 }
-.grid{
+.grid_instar{
+	display:grid;
+	grid-template-columns:1fr 1fr 1fr;
+	grid-template-rows:1fr 1fr 1fr;
+	grid-gap:10px;
+	
+}
+.grid_menu{
 	display:grid;
 	grid-template-columns:150px 1fr;
 }
