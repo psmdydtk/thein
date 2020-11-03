@@ -15,7 +15,7 @@
 </head>
 <body>
 <div class="header">
-	<nav class="nav">
+	<form class="nav" id="form">
 	<a class="link" href="/thein/main.do">메인</a>
 	<%if(session.getAttribute("id")==null){ %>
 		아이디<input type = "text" name="id">
@@ -23,10 +23,10 @@
 		<input type="button" value="로그인" id="login">
 	<%}else{ %>
 	<a class="link" href="/thein/UserInfo.do">
-	<c:out value="${sessionScope.id}"/>"님 환영</a>
+	${sessionScope.id}님 환영</a>
 	<a class="link" href="/thein/logout.do">로그아웃</a>
 	<%} %>
-	</nav>
+	</form>
 </div>
 </body>
 <script>

@@ -38,11 +38,16 @@ html, body {
 	grid-template-columns:1fr 1fr 1fr;
 	grid-template-rows:1fr 1fr 1fr;
 	grid-gap:10px;
-	
 }
 .grid_menu{
 	display:grid;
 	grid-template-columns:150px 1fr;
+}
+.grid_info{
+	display:grid;
+	grid-template-columns:100px 1fr;
+	grid-template-rows:1fr 1fr 1fr 1fr;
+	grid-gap:10px;
 }
 .footer{
 	clear: both;

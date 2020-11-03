@@ -27,10 +27,8 @@ public class CookerController {
 	//로그인---------------------------------------------------------------
 	@RequestMapping("login.do")
 	@ResponseBody
-	public String loginDo(@ModelAttribute String id,HttpSession session) throws Exception{
+	public String loginDo(String id,HttpSession session) throws Exception{
 		session.setAttribute("id",id);
-		String username=(String)session.getAttribute("id");
-		System.out.println(username);
 		return "1";
 		
 		//return (crudService.login(vo)==1)?"1":"0";
@@ -57,8 +55,9 @@ public class CookerController {
 	}
 	//회원정보 가져오기-------------------------------------------------
 	@RequestMapping("UserInfo.do")
-	public ModelAndView info(@RequestParam("id") String id) {
+	public ModelAndView info(HttpSession session) {
 		//String result = service.toString();
+		String id=(String)session.getAttribute("id");
 		return new ModelAndView("UserInfo","info",service.info(id));//id로 회원 전체 정보 가져와
 	}
 	
