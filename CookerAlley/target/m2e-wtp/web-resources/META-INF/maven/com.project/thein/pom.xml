@@ -138,6 +138,12 @@
 			<artifactId>spring-jdbc</artifactId>
 			<version>5.0.14.RELEASE</version>
 		</dependency>
+		<!-- mariaDB -->
+		<dependency>
+			<groupId>org.mariadb.jdbc</groupId>
+			<artifactId>mariadb-java-client</artifactId>
+			<version>2.3.0</version>
+		</dependency>
 		
 		
 
