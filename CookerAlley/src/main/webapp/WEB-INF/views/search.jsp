@@ -12,6 +12,8 @@
 </head>
 
 <body>
+<div class="grid">
+<%@ include file="Menu.jsp"%>
 <!------------------------------ main  -->
 	<div class="container">
 		<H3>리스트 페이지</H3>
@@ -41,5 +43,7 @@
 		</form>
 		</div>
 	</div>
+</div>
 </body>
+<%@ include file="Footer.jsp"%>
 </html>

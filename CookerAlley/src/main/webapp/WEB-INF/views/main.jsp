@@ -11,6 +11,7 @@
 <!----------------------------- Header  -->
 <head>
 <%@ include file="Header.jsp"%>
+
 <meta charset="UTF-8">
 <!-- jQuery 기본 js파일 -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -22,8 +23,10 @@
 </head>
 
 <body>
+<div>
+
 <!------------------------------ main  -->
-	<div class="container">
+	<div class="container" style="width:80%;">
 		<H3>메인 페이지</H3>
 <!------------------------------ 검색  -->
 		<form class="search" action="/thein/search.do" method="POST">
@@ -42,5 +45,7 @@
 		</div>
 <!------------------------------- Footer  -->
 	</div>
+</div>
 </body>
+
 </html>

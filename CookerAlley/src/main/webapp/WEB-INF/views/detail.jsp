@@ -12,6 +12,8 @@
 </head>
 
 <body>
+<div class="grid">
+<%@ include file="Menu.jsp"%>
 <!------------------------------ main  -->
 	<div class="container">
 		<H3>상세 페이지</H3>
@@ -29,12 +31,17 @@
 		<div class="hash">
 		<form>
 			<input type="button" value="에약">
-			<input type="button" value="###">
+			<a href="" class="link">###1</a>
+			<a href="" class="link">###2</a>
+			<a href="" class="link">###3</a>
 		</form>
 		</div>
 <!------------------------------ keyword  -->
 		<div class="keyword">
 			<H3>키워드</H3>
+		</div>
 	</div>
+</div>
 </body>
+<%@ include file="Footer.jsp"%>
 </html>

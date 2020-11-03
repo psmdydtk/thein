@@ -2,40 +2,68 @@
 html, body {
 	margin: 0px;
 }
+.header{
+	border:1px solid black;
+	margin-bottom:3px;
+	padding:auto;
+}
+.nav{
+	text-align: right;
+	margin-top: 3px;
+	margin-bottom: 3px;
+	padding:3px;
+}
+.sidebar-left{
+	border:1px solid red;
+	float:left;
+	padding:10px;
+	margin:3px;
+	
+}
 .container {
-	border:5px dashed #bcbcbc;
-	width: 600px;
-	margin: 0px auto;
-	padding:0px;
+	border:1px solid black;
+	float:right;
+	margin:3px;
+	padding:10px;
+	
 }
-.menu {
-	padding: 0px 20px;
-	height: 30px;
-	background-color: #C8EBFA;
-	display: flex;
-	display: -webkit-flex;
-	justify-content: flex-end;
-	align-items: center;
+.grid{
+	display:grid;
+	grid-template-columns:150px 1fr;
 }
+.footer{
+	clear: both;
+	padding:5px;
+	border:1px solid black;
+	margin-top:3px;
+}
+
+
+
 .link{
 	text-decoration:none;
 	color:green;
 }
 .search{
-	border:5px dashed #bcbcbc;
+	border:1px solid #bcbcbc;
 	padding: 20px 20px;
+	margin:5px;
 	align-items: center;
 	align-content: center;
 }
 .instar{
-	border:5px dashed #bcbcbc;
+	margin:5px;
+	border:1px solid #bcbcbc;
 }
 .list{
-	border:5px dashed #bcbcbc;
+	margin:5px;
+	border:1px solid #bcbcbc;
 }
 .hash{
-	border:5px dashed #bcbcbc;
+	margin:5px;
+	border:1px solid #bcbcbc;
 }
 .keyword{
-	border:5px dashed #bcbcbc;
+	margin:5px;
+	border:1px solid #bcbcbc;
 }

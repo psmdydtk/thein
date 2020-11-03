@@ -11,18 +11,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-<div class="container">
-	<div class="menu">
-	<div>
-	<a href="/thein/main.do" class="link">메인 </a>
-	</div>
-		<div>
-			<a href="" class="link">회원가입 </a>
-		</div>
-		<div>
-			<a href="" class="link">로그인</a>
-		</div>
-	</div>
+<div class="header">
+	<nav class="nav">
+	<a class="link" href="/thein/main.do">메인</a>
+	<a class="link" href="#">메인</a>
+	<a class="link" href="#">메인</a>
+	</nav>
 </div>
 </body>
 </html>
