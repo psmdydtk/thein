@@ -37,7 +37,6 @@ $('#login').click(function(){
 		data : $('#form').serialize(),
 		success : function(response){
 				if(response =="1"){
-					//session?
 					alert("로그인 성공");
 					location.href="/thein/main.do";
 				}else{

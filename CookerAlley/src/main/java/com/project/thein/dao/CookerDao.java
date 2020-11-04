@@ -1,5 +1,7 @@
 package com.project.thein.dao;
 
-public interface CookerDao {
+import com.project.thein.vo.CookerVO;
 
+public interface CookerDao {
+	public int login(CookerVO vo);
 }
