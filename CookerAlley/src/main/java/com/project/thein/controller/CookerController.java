@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.thein.service.CookerService;
-import com.project.thein.vo.CookerVO;
 
 
 @Controller
@@ -28,13 +27,10 @@ public class CookerController {
 	//로그인---------------------------------------------------------------
 	@RequestMapping("login.do")
 	@ResponseBody
-	public String loginDo(@ModelAttribute CookerVO vo,HttpSession session) throws Exception{
-		if(service.login(vo)==1) {
-			session.setAttribute("id",vo.getId());
-			return "1";
-		}else {
-			return "0";
-		}
+	public String loginDo(String id,HttpSession session) throws Exception{
+		session.setAttribute("id",id);
+		return "1";
+		
 		//return (crudService.login(vo)==1)?"1":"0";
 	}
 	//로그아웃------------------------------------------------------
