@@ -16,28 +16,11 @@
 <%@ include file="Menu.jsp"%>
 <!------------------------------ main  -->
 	<div class="container">
-		<H3>회원정보페이지</H3>
+		<H3>식당관리페이지</H3>
 <!------------------------------ info list  -->
-		<form class="grid_info">
-			<c:if test="${!empty info}">
-				<div>
-					<label>아이디</label>
-					<input type="text" name="id" value="${info}" readonly="readonly" style="color: gray;">
-				</div>
-				<div>
-					<label>이름</label>
-					<input type="text" name="id" value="${info}">
-				</div>
-				<div>
-					<label>email</label>
-					<input type="text" name="id" value="${info}">
-				</div>
-				<div>
-					<label>SNS</label>
-					<input type="text" name="id" value="${info}">
-				</div>
-			</c:if>
-		</form>
+		<div>
+			###
+		</div>
 	</div>
 </div>
 </body>
