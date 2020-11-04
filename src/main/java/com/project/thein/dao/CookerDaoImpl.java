@@ -23,7 +23,9 @@ public class CookerDaoImpl implements CookerDao {
 	@Override
 	public UserVO login(UserVO vo){
 		// TODO Auto-generated method stub
-		return factory.openSession().selectOne("cooker.mapper.loginUser", vo);
+		UserVO uvo = factory.openSession().selectOne("cooker.mapper.loginUser", vo);
+		return uvo;
+		
 	}
 
 }

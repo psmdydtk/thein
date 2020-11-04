@@ -3,9 +3,9 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="cooker.mapper">
-<select id="loginUser" parameterType="user" resultType="_int">
+<select id="loginUser" parameterType="user" resultType="user">
 	<![CDATA[
-	SELECT COUNT(*)
+	SELECT *
 	FROM bt_user
 	WHERE user_id = #{user_id} AND user_pwd=#{user_pwd}
 	]]>

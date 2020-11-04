@@ -32,14 +32,15 @@ public class CookerController {
 	@RequestMapping("login.do")
 	@ResponseBody
 	public String loginDo(@ModelAttribute UserVO vo,HttpSession session) throws Exception{
-		if(service.login(vo)==null) {
+		Uservo vo=service.login(vo);
+		System.out.println();
+		if(list !=null) {
 			System.out.println(vo.getUser_id()+vo.getUser_type()+vo.getUser_pwd());
 			
 			session.setAttribute("id",vo.getUser_id());
 			session.setAttribute("uType", vo.getUser_type());
 			return "1";
 		}else {
-			
 			return "0";
 		}
 		//return (crudService.login(vo)==1)?"1":"0";
