@@ -25,13 +25,6 @@ public class CookerServiceimpl implements CookerService {
     int count = dao.countList(loc);
     return count;
  }
-
-	@Override
-	public String detail(String cooker) {
-		// TODO Auto-generated method stub
-		return "식당 : "+cooker;
-	}
-
 	@Override
 	public String info(String id) {
 		// TODO Auto-generated method stub
@@ -42,5 +35,14 @@ public class CookerServiceimpl implements CookerService {
 	public UserVO login(UserVO vo){
 		return dao.login(vo);
 	}
-
+	@Override
+	public ShopVO shopSearch(ShopVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.shopSearch(vo);
+	}
+	@Override
+	   public List<ShopVO> searchShop(String shop) throws Exception {
+	      List<ShopVO> list = dao.searchShop(shop);
+	      return list;
+	   }
 }

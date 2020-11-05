@@ -17,21 +17,29 @@
 <div class="header">
 	<form class="nav" id="form">
 		<a class="link" href="/thein/main.jsp">메인</a>
-		<%if(session.getAttribute("uType")==null){ %>
+		<c:choose>
+<%-- 		<%if(session.getAttribute("uType")==null){ %> --%>
+		<c:when test="${empty sessionScope.uType}">
 			ID <input type = "text" name="user_id">
 			PWD <input type = "password" name="user_pwd">
 			<input type="button" value="로그인" id="login">
 			<input type="button" value="가입" id="insert">
-		<%}else if(session.getAttribute("uType").equals("9999")){ %>
+		</c:when>
+		<c:when test="${sessionScope.uType eq '9999'}">
+<%-- 		<%}else if(session.getAttribute("uType").equals("9999")){ %> --%>
 			<a class="link" href="/thein/UserInfo.do">
 			${sessionScope.id}님 환영</a>
 			<a class="link" href="/thein/shopMgt.jsp">식당 관리</a>
 			<a class="link" href="/thein/logout.do">로그아웃</a>
-		<%}else{ %>
+		</c:when>
+		<c:otherwise>
+<%-- 		<%}else{ %> --%>
 			<a class="link" href="/thein/UserInfo.do">
 			${sessionScope.id}님 환영</a>
 			<a class="link" href="/thein/logout.do">로그아웃</a>
-		<%}%>
+<%-- 		<%}%> --%>
+		</c:otherwise>
+		</c:choose>
 	</form>
 </div>
 </body>

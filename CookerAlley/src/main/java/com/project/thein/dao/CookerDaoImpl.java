@@ -35,4 +35,17 @@ public class CookerDaoImpl implements CookerDao {
 		
 	}
 
+	@Override
+	public ShopVO shopSearch(ShopVO vo) throws Exception {
+		//ShopVO list=factory.openSession().selectOne("cooker.mapper.shopSearch",vo);
+		return factory.openSession().selectOne("cooker.mapper.shopSearch",vo);
+	}
+
+	@Override
+	   public List<ShopVO> searchShop(String shop) throws Exception {
+	      int shopid = Integer.parseInt(shop);
+	      List<ShopVO> list = factory.openSession().selectList("cooker.mapper.searchShop", shopid);
+	      System.out.println(list);
+	      return list;
+	   }
 }

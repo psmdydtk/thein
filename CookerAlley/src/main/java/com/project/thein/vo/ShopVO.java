@@ -3,12 +3,18 @@ package com.project.thein.vo;
 public class ShopVO {
    private String shop_id,shop_name,shop_street,shop_menu1,shop_menu2,shop_menu3;
    private String shop_location,shop_description,shop_img,shop_hash1,shop_hash2,shop_hash3;
-   private int shop_menu1_price,shop_menu2_price,shop_menu3_price3;
+   private int shop_menu1_price,shop_menu2_price,shop_menu3_price;
    private double shop_point;
+   
+   public ShopVO() {
+	super();
+}
+
    public String getShop_id() {
       return shop_id;
    }
-   public void setShop_id(String shop_id) {
+
+public void setShop_id(String shop_id) {
       this.shop_id = shop_id;
    }
    public String getShop_name() {
@@ -89,11 +95,11 @@ public class ShopVO {
    public void setShop_menu2_price(int shop_menu2_price) {
       this.shop_menu2_price = shop_menu2_price;
    }
-   public int getShop_menu3_price3() {
-      return shop_menu3_price3;
+   public int getShop_menu3_price() {
+      return shop_menu3_price;
    }
-   public void setShop_menu3_price3(int shop_menu3_price3) {
-      this.shop_menu3_price3 = shop_menu3_price3;
+   public void setShop_menu3_price(int shop_menu3_price) {
+      this.shop_menu3_price = shop_menu3_price;
    }
    public double getShop_point() {
       return shop_point;
@@ -108,6 +114,6 @@ public class ShopVO {
             + ", shop_location=" + shop_location + ", shop_description=" + shop_description + ", shop_img="
             + shop_img + ", shop_hash1=" + shop_hash1 + ", shop_hash2=" + shop_hash2 + ", shop_hash3=" + shop_hash3
             + ", shop_menu1_price=" + shop_menu1_price + ", shop_menu2_price=" + shop_menu2_price
-            + ", shop_menu3_price3=" + shop_menu3_price3 + ", shop_point=" + shop_point + "]";
+            + ", shop_menu3_price3=" + shop_menu3_price + ", shop_point=" + shop_point + "]";
    }
 }

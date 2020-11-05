@@ -7,42 +7,121 @@
 <!----------------------------- Header  -->
 <head>
 <meta charset="UTF-8">
+<!-- bootstrap -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<style>
+	div[class^="col"]{padding:5px;}
+</style>
 <%@ include file="Header.jsp"%>
+<script async src="//www.google-analytics.com/analytics.js"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
 </head>
 
 <body>
+<%
+String sido1=request.getParameter("sido1");
+String gugun1 = request.getParameter("gugun1");
+String datepick = request.getParameter("datepick");
+%>
+
 <div class="grid_menu">
 <%@ include file="Menu.jsp"%>
+
 <!------------------------------ main  -->
-	<div class="container">
-		<H3>리스트 페이지</H3>
+   <div class="container">
+      <H3>리스트 페이지</H3>
 <!------------------------------ 검색  -->
-		<form class="search" action="/thein/search.do" method="POST">
-			<label for="location">위치 : </label>
-			<select name="loc" id="loc">
-				<option value="gangnam">강남구</option>
-				<option value="jung">중구</option>
-				<option value="mapo">마포구</option>
-				<option value="seodaemon">서대문구</option>
-			</select>
-			<input type="date" name="datepick">
-			<input type="submit" value="검색">
-		</form>
+      <form class="search" action="/thein/search.do" method="POST">
+         <label for="location">위치 : </label>
+         <select name="loc" id="loc">
+            <option value="gangnam">강남구</option>
+            <option value="jung">중구</option>
+            <option value="mapo">마포구</option>
+            <option value="seodaemon">서대문구</option>
+         </select>
+         <input type="date" name="datepick">
+         <input type="submit" value="검색">
+      </form>
 <!------------------------------ list  -->
-		<div class="list">
-		<form action="/thein/detail.do" method="POST">
-			<H3>검색 결과 목록</H3>
-			<c:if test="${!empty list}">
-				<p>${list}</p>
-				<label>for each로 돌리기 - 식당1</label>
-				<input type="text" name="cooker">
-				<input type="submit" name="detail" value="검색">
-			
-			</c:if>
-		</form>
-		</div>
-	</div>
+      <div class="list" >
+      <table data-text-content="true">
+         <tbody>
+            <tr><th>검색 결과</th></tr>
+            <c:forEach items="${viewAll }" var="list">
+               <tr>
+                  <td>
+                     <form id="form${list.shop_id}" action="detail.do" method="POST">
+                        <table border="1" style="width:500px;margin:3px;padding:10px;">
+						<tr>
+							<td rowspan="6" colspan="4">이미지가나올거지롱</td>
+							<th colspan="3"><a href="#" id="link${list.shop_id}" style="color:blue">${list.shop_name}</a></th>
+							<td rowspan="2" style="text-align: right;"><img src="../../../css/binheart.svg"></td>
+						</tr>
+						<tr>
+							<th colspan="3">별점 :      ${list.shop_point}</th>
+						</tr>
+						<tr>
+							<td colspan="4">골목 :      ${list.shop_street}</td>
+						</tr>
+						<tr>
+							<td colspan="4">대표메뉴 :       ${list.shop_menu1}  가격 : ${list.shop_menu1_price}</td>
+						</tr>
+<tr>
+							<td colspan="4">설명 :  ${list.shop_description}</td>
+						</tr>
+						<tr>
+							<td colspan="4">
+							<input type="button" name="#" value="검색" style="float: right">
+							<c:if test="${sessionScope.uType eq '9999'}">
+								<input type="button" value="수정" onclick="window.location.href='/thein/shopUpdate.do?shop_id=${list.shop_id}'" style="float: right;margin-right:5px;">
+								<a href="/thein/shopUpdate.do?shop_id=${list.shop_id}">이동</a>
+							</c:if>
+							</td>
+						</tr>
+						</table>
+                        <input type="hidden" id= "shop_id_${list.shop_id}" name="shop_id_${list.shop_id}" value = "${list.shop_id}"/>
+                     </form>
+                  </td>
+                  <script type="text/javascript">
+                  $( "#link${list.shop_id}" ).click(function() {
+                     $("#form${list.shop_id}").submit();
+                     });
+                  </script>
+               </tr>
+            </c:forEach>
+         </tbody>
+      </table>
+      </div>
+      <div style="display: block; text-align: center;">   
+      <c:if test="${paging.startPage != 1 }">         
+         <a href="search.do?sido1=<%=sido1 %>&gugun1=<%=gugun1 %>&datepick=<%=datepick %>&nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
+      </c:if>
+      <c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
+         <c:choose>
+            <c:when test="${p == paging.nowPage }">
+               <b>${p }</b>
+            </c:when>
+            <c:when test="${p != paging.nowPage }">
+               <a href="search.do?sido1=<%=sido1 %>&gugun1=<%=gugun1 %>&datepick=<%=datepick %>&nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
+            </c:when>
+         </c:choose>
+      </c:forEach>
+      <c:if test="${paging.endPage != paging.lastPage}">
+         <a href="search.do?sido1=<%=sido1 %>&gugun1=<%=gugun1 %>&datepick=<%=datepick %>&nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
+      </c:if>
+   </div>
+   </div>
 </div>
 </body>
 <%@ include file="Footer.jsp"%>
