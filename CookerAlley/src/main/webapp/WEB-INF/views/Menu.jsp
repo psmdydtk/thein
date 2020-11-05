@@ -16,8 +16,8 @@
 			<p><a href="#">SNS</a></p>
 			
 			<p><a href="#">가입하기</a></p>
-		<%}else if(session.getAttribute("id").equals("admin")){ %>
-			<p><a href="/thein/">식당 추가</a></p>
+		<%}else if(session.getAttribute("uType").equals("9999")){%>
+			<p><a href="/thein/shopMgt.jsp?type=insert">식당 추가</a></p>
 			<p><a href="#">식당 수정</a></p>
 			<p><a href="#">식당 삭제</a></p>
 		<%}else{ %>

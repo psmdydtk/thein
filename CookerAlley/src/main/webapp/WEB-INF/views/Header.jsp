@@ -16,24 +16,22 @@
 <body>
 <div class="header">
 	<form class="nav" id="form">
-	<a class="link" href="/thein/main.do">메인</a>
-	<%if(session.getAttribute("uType")==null){ %>
-		아이디<input type = "text" name="user_id">
-		패스워드 <input type = "password" name="user_pwd">
-		<input type="button" value="로그인" id="login">
-		<input type="button" value="가입" id="insert">
-		
-	<%}else if(session.getAttribute("uType").equals("9999")){ %>
-		<a class="link" href="/thein/UserInfo.do">
-		${sessionScope.id}님 환영</a>
-		<a class="link" href="/thein/shopMgt.do">식당 관리</a>
-		<a class="link" href="/thein/logout.do">로그아웃</a>
-		
-	<%}else{ %>
-		<a class="link" href="/thein/UserInfo.do">
-		${sessionScope.id}님 환영</a>
-		<a class="link" href="/thein/logout.do">로그아웃</a>
-	<%}%>
+		<a class="link" href="/thein/main.jsp">메인</a>
+		<%if(session.getAttribute("uType")==null){ %>
+			ID <input type = "text" name="user_id">
+			PWD <input type = "password" name="user_pwd">
+			<input type="button" value="로그인" id="login">
+			<input type="button" value="가입" id="insert">
+		<%}else if(session.getAttribute("uType").equals("9999")){ %>
+			<a class="link" href="/thein/UserInfo.do">
+			${sessionScope.id}님 환영</a>
+			<a class="link" href="/thein/shopMgt.jsp">식당 관리</a>
+			<a class="link" href="/thein/logout.do">로그아웃</a>
+		<%}else{ %>
+			<a class="link" href="/thein/UserInfo.do">
+			${sessionScope.id}님 환영</a>
+			<a class="link" href="/thein/logout.do">로그아웃</a>
+		<%}%>
 	</form>
 </div>
 </body>
@@ -46,7 +44,7 @@ $('#login').click(function(){
 		success : function(response){
 				if(response =="1"){
 					alert("로그인 성공");
-					location.href="/thein/main.do";
+					location.href="/thein/main.jsp";
 				}else{
 					alert("로그인 실패");
 					$('#form')[0].reset();

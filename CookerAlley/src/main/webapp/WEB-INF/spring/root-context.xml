@@ -19,8 +19,7 @@
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="configLocation" value="classpath:com/project/thein/mybatis/mybatis-config.xml" />
-<!--         <property name="mapperLocations" value="classpath:com/project/thein/mybatis/*mapping.xml" />-->
-         <property name="transactionFactory" ref="factory"/>
+        <property name="transactionFactory" ref="factory"/>
 	</bean>	
 	
 	<bean id="factory" class="org.mybatis.spring.transaction.SpringManagedTransactionFactory"/>	

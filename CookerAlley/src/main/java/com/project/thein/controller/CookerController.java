@@ -29,10 +29,6 @@ public class CookerController{
 		this.service = service;
 	}
 	
-	@RequestMapping("main.do")
-	public ModelAndView home() {
-		return new ModelAndView("main");
-	}
 	//로그인---------------------------------------------------------------
 	@RequestMapping("login.do")
 	@ResponseBody
@@ -61,7 +57,7 @@ public class CookerController{
 	@RequestMapping("logout.do")
 	public String logout(HttpSession session) {
 		session.invalidate();
-		return "redirect:main.do";
+		return "redirect:main.jsp";
 	}
 		
 	// 검색입력받아 식당 리스트 뽑기-------------------------------------------------
