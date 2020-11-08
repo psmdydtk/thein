@@ -10,15 +10,15 @@
 <!-- fontawesome -->
 <script src="https://kit.fontawesome.com/8fed18a767.js" crossorigin="anonymous"></script>
 <!-- bootstrap -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<style>
+<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+ --><style>
 	div[class^="col"]{padding:5px;}
 </style>
 <%@ include file="Header.jsp"%>
 <script async src="//www.google-analytics.com/analytics.js"></script>
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+ -->
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -52,7 +52,7 @@ String datepick = request.getParameter("datepick");
             <option value="mapo">마포구</option>
             <option value="seodaemon">서대문구</option>
          </select>
-         <input type="date" name="datepick">
+         <input type="date" name="datepick"  value="<%=datepick %>">
          <input type="submit" value="검색">
       </form>
 <!------------------------------ list  -->
@@ -63,12 +63,12 @@ String datepick = request.getParameter("datepick");
             <c:forEach items="${viewAll }" var="list">
                <tr>
                   <td>
-                     <form id="form${list.shop_id}" action="detail.do" method="POST">
-                        <table border="1" style="width:500px;margin:3px;padding:10px;">
+                     <form id="form${list.shop_id}" action="detail.do?datepick=<%=datepick %>&shop_id=${list.shop_id}" method="POST">
+                        <table style="width:900px;margin:3px;padding:10px;border:1px solid pink">
 						<tr>
-							<td rowspan="6" colspan="4"><img height="300" width="300" src= "https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/e35/s1080x1080/116337329_652158698743520_2370389466736758097_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&_nc_cat=108&_nc_ohc=piCNR4iaLvIAX84XpuQ&_nc_tp=15&oh=143d256b54ba12948884137c9f22b87d&oe=5FCF3F5A"></td>
+							<td rowspan="6" style="width:300px"><img height="300" width="300" src= "https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/e35/s1080x1080/116337329_652158698743520_2370389466736758097_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&_nc_cat=108&_nc_ohc=piCNR4iaLvIAX84XpuQ&_nc_tp=15&oh=143d256b54ba12948884137c9f22b87d&oe=5FCF3F5A"></td>
 							<th colspan="3"><a href="#" id="link${list.shop_id}" style="color:blue">${list.shop_name}</a></th>
-							<td rowspan="2" style="text-align: right;"><i class="heartClick far fa-heart" style="font-size:30px;margin-right:5px;"></i></td>
+							<td rowspan="2" style="text-align: right;"><i class="heartClick far fa-heart" style="font-size:40px;margin-right:5px;"></i></td>
 						</tr>
 						<tr>
 							<th colspan="3">별점 :      ${list.shop_point}</th>
@@ -79,7 +79,7 @@ String datepick = request.getParameter("datepick");
 						<tr>
 							<td colspan="4">대표메뉴 :       ${list.shop_menu1}  가격 : ${list.shop_menu1_price}</td>
 						</tr>
-<tr>
+						<tr>
 							<td colspan="4">설명 :  ${list.shop_description}</td>
 						</tr>
 						<tr>
@@ -131,9 +131,11 @@ String datepick = request.getParameter("datepick");
 $('.heartClick').click(function() {
    $(this).toggleClass('far fas');
    if($(this).hasClass('fas')){
-	   //db에 추가하는 기능 //채움 하트 클릭 시 
+	   //db에 추가하는 기능 //빈 하트 클릭 시 
+	   alert("뿅♥");
    }else{
-	 //db에서 삭제 기능 //빈 하트 클릭 시
+	 //db에서 삭제 기능 //채움 하트 클릭 시
+	   alert("ㅠㅠ");
    }
 });
 </script>

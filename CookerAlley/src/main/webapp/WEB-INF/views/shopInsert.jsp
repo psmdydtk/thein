@@ -1,15 +1,34 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ 
 <!DOCTYPE html>
 <html>
+<!----------------------------- Header  -->
 <head>
 <meta charset="UTF-8">
+<%@ include file="Header.jsp"%>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<style>
+	div[class^="col"]{padding:5px;}
+	label[class^="label"]{width:50px;}
+</style>
+<title>Insert title here</title>
 </head>
+
 <body>
+<div class="grid_menu">
+<%-- <%@ include file="../WEB-INF/views/Menu.jsp"%> --%>
+<%@ include file="Menu.jsp"%>
+<!------------------------------ main  -->
+	<div class="container">
+		<H3>식당관리페이지</H3>
 	insert form
+	<form id="form" name="form">
+	<input type="text" name="shop_name1">
 	<div class="row">
 		<div class="col">
-			<label class="label">가게명</label><input type="text" name="shop_name">
+			<label class="label">가게명</label><input type="text" id="shop_name" name="shop_name" >
 		</div>
 		<div class="col">
 			<label class="label">골목</label><input type="text" name="shop_street">
@@ -71,5 +90,39 @@
 			<textarea style="width: 300px; padding: 5px;" name="shop_description"></textarea>
 		</div>
 	</div>
+	<input type="button" id="submit" value="확인용">
+	</form>
+	</div>
+</div>
 </body>
+<%@ include file="Footer.jsp"%>
+<script>
+$('#submit').click(function(){
+	var sendData = $("#form").serialize();
+	alert(sendData +"gg");
+	console.log(sendData);
+	//doInsert();
+});
+
+function doInsert(){
+	$.ajax({
+		type : "POST",
+		url : "/thein/insert.do",
+		data : $('#form').serialize(),
+		success : function(response){
+				if(response =="1"){
+					//session?
+					alert("저장 성공");
+					$('#form')[0].reset();
+				}else{
+					alert("저장 실패");
+					$('#form')[0].reset();
+				}
+			},
+		//error:function(request,status,error){
+		//	    console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);}
+
+	});
+}
+</script>
 </html>

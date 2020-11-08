@@ -22,19 +22,20 @@
 			<c:if test="${!empty info}">
 				<div>
 					<label>아이디</label>
-					<input type="text" name="id" value="${info}" readonly="readonly" style="color: gray;">
+					<input type="text" name="id" value="${info.user_id}" readonly="readonly" style="color: gray;">
 				</div>
+				<br>
 				<div>
 					<label>이름</label>
-					<input type="text" name="id" value="${info}">
-				</div>
+					<input type="text" name="id" value="${info.user_name}">
+				</div><br>
 				<div>
 					<label>email</label>
-					<input type="text" name="id" value="${info}">
-				</div>
+					<input type="text" name="id" value="${info.user_email}">
+				</div><br>
 				<div>
 					<label>SNS</label>
-					<input type="text" name="id" value="${info}">
+					<input type="text" name="id" value="${info.user_sns_id}">
 				</div>
 			</c:if>
 		</form>

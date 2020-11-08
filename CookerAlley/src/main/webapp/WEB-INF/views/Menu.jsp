@@ -17,7 +17,8 @@
 			
 			<p><a href="#">가입하기</a></p>
 		<%}else if(session.getAttribute("uType").equals("9999")){%>
-			<p><a href="/thein/shopMgt.jsp?type=insert">식당 추가</a></p>
+			<!-- <p><a href="/thein/shopMgt.jsp?type=insert">식당 추가</a></p> -->
+			<p><a href="shopInsert.do">식당 추가</a></p>
 			<p><a href="/thein/shopMgt.jsp?type=update">식당 수정</a></p>
 			<p><a href="/thein/shopMgt.jsp?type=delete">식당 삭제</a></p>
 		<%}else{ %>

@@ -58,7 +58,7 @@ $('#login').click(function(){
 		success : function(response){
 				if(response =="1"){
 					alert("로그인 성공");
-					location.href="/thein/main.jsp";
+					location.href="/thein/main.do";
 				}else{
 					alert("로그인 실패");
 					$('#form')[0].reset();

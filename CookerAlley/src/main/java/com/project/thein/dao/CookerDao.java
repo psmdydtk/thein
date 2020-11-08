@@ -16,6 +16,8 @@ public interface CookerDao {
 	public List<ShopVO> searchShop(int shop)throws Exception;
 	public List<ReservationVO> searchReserTime (ReservationVO rv)throws Exception;
 	public List<KeywordVO> searchKeyword (String shop) throws Exception;
-
+	public int insert(ShopVO vo);
+	public UserVO info(String id);
+	public int insertReserSuccess(ReservationVO vo)throws Exception;
 
 }

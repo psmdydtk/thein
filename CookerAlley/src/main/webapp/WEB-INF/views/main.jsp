@@ -5,7 +5,7 @@
 <%-- <%@page import="com.project.thein.vo.CookerVO"%> --%>
 <%@page import="java.util.List"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@page import=" java.util.Date" %>
 <!DOCTYPE html>
 <html>
 <!----------------------------- Header  -->
@@ -24,7 +24,7 @@
    <script type="text/javascript">
 $('document').ready(function() {
  var area0 = ["시/도 선택","서울특별시","경기도","인천광역시","대전광역시","강원도","충청남도","전라남도","경상북도","경상남도","제주도"];
-  var area1 = ["마포구","노원구","도봉구","강동구","성동구","서대문구","동대문구","용산구","성북구","광진구","중구"];
+  var area1 = [" ","마포구","노원구","도봉구","강동구","성동구","서대문구","동대문구","용산구","성북구","광진구","중구"];
    var area2 = ["군포시","부천시","수원시","평택시"];
    var area3 = ["중구","서구"];
    var area4 = ["동구"];
@@ -78,31 +78,32 @@ $('document').ready(function() {
         	 <label for="location">위치 : </label>
          	 <select name="sido1" id="sido1"></select>
         	 <select name="gugun1" id="gugun1" ></select>
-        	 <input type="date" name="datepick">
+        	 <input type="date" name="datepick" id="datepick">
          </div>
          <div style="display: inline-block;">
-      		<input type="image" value="" src="./resources/search.png" name="submit" value="submit" height="40" width="40" >
+      		<input type="image" value="" src="./resources/search.png" name="submit" value="submit" height="20" width="20">
       	</div>
       </form>
      </div>
 <!------------------------------- instar  -->
-      <div class="instar">
-         <h3>INSTAR 부분 (3x3)</h3>
-         <div class="grid_instar">
-            <c:forEach items="${json}" var="json">
-         		<div style="border:1px solid red;">
-         		<img src="${json.value.src }" width="80px" height="80px"></img>
-         		<div style="border:1px solid pink;">
-	         		<c:forEach items="${json.value.tags }" var="tag">
-	         			<a>${tag[0]}</a>
-	         			<a>${tag[1]}</a>
-	         			<a>${tag[2]}</a>
-	         		</c:forEach>
-         		</div>
-         		</div>
-         	</c:forEach> 
+           <div class="instar">
+         <h4>&nbsp;&nbsp; 골목식당 인기게시물</h4>
+         <div class="grid_instar" style="grid-gap: 30px; margin:100px;">
+            <c:forEach items="${crawl}" var="crawl">
+               <div style="border:1px solid gray; width:400px">
+               <img src="${crawl.value.src }" width="100%" height="330px"></img>
+               <div style="width: 100%; text-align:center; font-size:14px;">
+                  <c:forEach items="${crawl.value.tags }" var="tag">
+                     <a>${tag[0]}</a>
+                     <a>${tag[1]}</a>
+                     <a>${tag[2]}</a>
+                  </c:forEach>
+               </div>
+               </div>
+            </c:forEach> 
          </div>
       </div>
+
 <!------------------------------- Footer  -->
    </div>
 </body>

@@ -28,7 +28,7 @@
 		<c:choose>
 		<c:when test="${!empty param.type}">
 			<c:if test="${param.type eq 'insert'}">
-				<%@include file="../WEB-INF/views/shopInsert.jsp" %>
+				<%-- <%@include file="../WEB-INF/views/shopInsert.jsp" %> --%>
 			</c:if>
 			
 			<c:if test="${param.type eq 'update'}">

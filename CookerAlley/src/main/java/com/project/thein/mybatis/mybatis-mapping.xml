@@ -19,7 +19,6 @@
    WHERE shop_location like CONCAT('%',#{loc},'%')
    ORDER BY shop_name DESC
    LIMIT #{start},7
-   
    ]]>
    </select>
 
@@ -67,6 +66,39 @@
    <![CDATA[
    SELECT *
 	FROM bt_keyword
+   ]]>
+   </select>
+   <!-- 관리자 - 가게 입력 -->
+   <select id="insertShop" parameterType="shop">
+   <![CDATA[
+   INSERT INTO bt_shop 
+   (shop_name,shop_street,shop_menu1,shop_menu1_price,shop_menu2,shop_menu2_price,shop_menu3,shop_menu3_price,shop_location,shop_description,shop_img,shop_point,shop_hash1,shop_hash2,shop_hash3) 
+	VALUES
+	(#{shop_name},#{shop_street},#{shop_menu1},#{shop_menu1_price},#{shop_menu2},#{shop_menu2_price},#{shop_menu3},#{shop_menu3_price},#{shop_location},#{shop_description},#{shop_img},#{shop_point},#{shop_hash1},#{shop_hash2},#{shop_hash3}) 
+   ]]>
+   </select>
+   <!-- 사용자 정보 -->
+	<select id="Userinfo" resultType="user">
+	<![CDATA[
+	SELECT *
+	FROM bt_user
+	WHERE user_id = #{user_id}
+	]]>
+	</select>
+	<!--예약 하기  -->
+   <select id="reservationInsert" resultType="int">
+   <![CDATA[
+   INSERT INTO 
+   `thein`.`bt_reservation` (
+    `reser_shop_id`,
+    `reser_user_id`, 
+    `reser_shop_date`, 
+    `reser_shop_hour`, 
+    `reser_shop_person`, 
+    `reser_shop_price`, 
+    `reser_shop_regi`,
+    `reser_pass`) 
+   VALUES (#{reser_shop_id}, #{reser_user_id}, #{reser_shop_date}, #{reser_shop_hour}, #{reser_shop_person}, #{reser_shop_price}, #{reser_shop_regi},0)
    ]]>
    </select>
 

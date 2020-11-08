@@ -61,4 +61,25 @@ public class CookerDaoImpl implements CookerDao {
 		List<KeywordVO> list = factory.openSession().selectList("cooker.mapper.searchKeyword", shop);
 		return list;
 	}
+
+	@Override
+	public int insert(ShopVO vo) {
+		// TODO Auto-generated method stub
+		int result = factory.openSession().selectOne("cooker.mapper.insertShop", vo);
+		return result;
+
+	}
+
+	@Override
+	public UserVO info(String id) {
+		// TODO Auto-generated method stub
+		UserVO uvo = factory.openSession().selectOne("cooker.mapper.Userinfo", id);
+		return uvo;
+	}
+	  //예약
+	   @Override
+	   public int insertReserSuccess(ReservationVO vo) throws Exception {
+	      int insertDao = factory.openSession().insert("cooker.mapper.reservationInsert", vo);
+	      return insertDao;
+	   }
 }

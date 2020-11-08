@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
@@ -140,73 +141,67 @@ public class CookerController{
 	    * model.addAttribute("list", service.shopSearch(vo)); return "shopUpdate"; }
 	    */
 	   
+	   //메인 insta_hash---------------------------------------------------------
 	   @RequestMapping("main.do")
-	   public String main(Model md)throws Exception{
-	      // filereader한 객체를 오브젝트에 담고 jsonparser 로 파싱한다.
-	      JSONParser parser = new JSONParser();
-	      Object obj = parser.parse(new FileReader("/instagram/crawling.json"));
-	      // 파싱한 객체를 jsonobject 에 담는다
-	      JSONObject json = (JSONObject) obj;
-	      // json데이터를 꺼내오기위한 iterator
-	      Iterator it = json.keySet().iterator();
-	      // 꺼내온 데이터를 jsonarray로 저장
-	      JSONArray ja = new JSONArray();
-	      // 키값으로 사용
-	      String key;
-	      // 리턴할 데이터로 해쉬태그3개까지의값만을 가지고 리턴할 객체이다.
+	      public String main(Model md)throws Exception{
+	      JSONObject crawl = service.insta_crawl();
+	      md.addAttribute("crawl", crawl);
 	      
-	      JSONObject returnChangeJson = new JSONObject();
-	      // iterator를 이용하여 데이터꺼내서 JSONArray객체에 담는 작업
-	      int count = 0;
-	      while (it.hasNext()) {
-	         key = (String) it.next();
-	         ja.add(json.get(key));
+	         return "main";
 	      }
-	      for (int i = 0; i < ja.size(); i++) {
-	         JSONArray returnJsonArray = new JSONArray();
-	         JSONObject changeJo = new JSONObject();
-	         JSONObject changeJson = new JSONObject();
-	         changeJo = (JSONObject) ja.get(i);
-	         // System.out.println(changeJo);
-	         //System.out.println("뽑기src + " + changeJo.get("src"));
-	         changeJson.put("src", changeJo.get("src"));
-	         //System.out.println("뽑기tags " + changeJo.get("tags"));
-	         JSONArray jary = (JSONArray) changeJo.get("tags");
-	         
-	         List list = new ArrayList();
-	         for (int j = 0; j < jary.size(); j++) {
-	            if(j==3) {
-	               break;
-	            }
-	            list.add(jary.get(j));
-	         }
-	         returnJsonArray.add(list);
-	         changeJson.put("tags", returnJsonArray);
-	         returnChangeJson.put("key"+i, changeJson);
-	      }
-	      // 최종결과물
-	       System.out.println(returnChangeJson);
-	      md.addAttribute("json",returnChangeJson);
-	      
-	      return "main";
-	   }
-	   @RequestMapping("reservation.do")
-	   @ResponseBody
-	   public String reservation(@ModelAttribute ReservationVO rv,Model model) throws Exception{
-	      System.out.println("들어오긴하니");
-	      List<ReservationVO> list = service.searchReserTime(rv);
-	      
-	      model.addAttribute("reser",list);
-	      return "ajaxExam";
-	   }
+
+
+		/*
+		 * @RequestMapping("reservation.do")
+		 * 
+		 * @ResponseBody public String reservation(@ModelAttribute ReservationVO
+		 * rv,Model model) throws Exception{ System.out.println("들어오긴하니");
+		 * List<ReservationVO> list = service.searchReserTime(rv);
+		 * 
+		 * model.addAttribute("reser",list); return "ajaxExam"; }
+		 */
 	   @RequestMapping("go.do")
 	   public String go()throws Exception{
 	      return "go";
 	   }
-	   @RequestMapping("goreser")
-	   public String goreser()throws Exception{
-	      return "ajaxExam";
-	   }
 
+		/*
+		 * @RequestMapping("goreser") public String goreser()throws Exception{ return
+		 * "ajaxExam"; }
+		 */
+	   @RequestMapping("shopInsert.do")
+		public ModelAndView loginPage() {
+			return new ModelAndView("shopInsert");
+		}
+	   @RequestMapping("insert.do")
+		@ResponseBody
+		public String insert(@ModelAttribute ShopVO vo) throws Exception{
+			if(service.insert(vo)==1) {
+				return "1";
+			}else {
+				return "0";
+			}
+			//return (crudService.login(vo)==1)?"1":"0";
+		}
+	   @GetMapping("goReser.do")
+	      public String goReser(ReservationVO vo,Model mv) {
+	         //System.out.println(datepick + "called controller ");
+	         mv.addAttribute("mv",mv);
+	         return "Reservation";
+	      }
+	      
+	      @RequestMapping("Reservation.do")
+	      @ResponseBody
+	      public void reservation(HttpServletResponse response,HttpServletRequest request,ReservationVO vo,Model mv)throws Exception {
+	         mv.addAttribute("mv",mv);
+	         int result = service.insertReser(vo);
+	         
+	          if (result == 1) {
+	               // response data로 true를 출력
+	               response.getWriter().print(true);
+	            } else if (result == 0) {
+	               response.getWriter().print(false);
+	            }
+	         }
 
 }
