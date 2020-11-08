@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.thein.dao.CookerDao;
+import com.project.thein.vo.KeywordVO;
 import com.project.thein.vo.PagingVO;
+import com.project.thein.vo.ReservationVO;
 import com.project.thein.vo.ShopVO;
 import com.project.thein.vo.UserVO;
 
@@ -36,13 +38,18 @@ public class CookerServiceimpl implements CookerService {
 		return dao.login(vo);
 	}
 	@Override
-	public ShopVO shopSearch(ShopVO vo) throws Exception {
-		// TODO Auto-generated method stub
-		return dao.shopSearch(vo);
-	}
-	@Override
-	   public List<ShopVO> searchShop(String shop) throws Exception {
+	   public List<ShopVO> searchShop(int shop) throws Exception {
 	      List<ShopVO> list = dao.searchShop(shop);
 	      return list;
 	   }
+	@Override
+	public List<ReservationVO> searchReserTime(ReservationVO rv) throws Exception {
+		List<ReservationVO> list = dao.searchReserTime(rv);
+		return list;
+	}
+	@Override
+	public List<KeywordVO> searchKeyword(String shop) throws Exception {
+		List<KeywordVO> list = dao.searchKeyword(shop);
+		return list;
+	}
 }

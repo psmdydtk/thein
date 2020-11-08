@@ -52,4 +52,21 @@
    ]]>
    </select>
 
+<!--메인화면에서 검색기능  -->
+   <select id="searchReserTime" resultType="reser">
+   <![CDATA[
+   SELECT *
+   FROM bt_reservation
+   WHERE reser_shop_id = #{reser_shop_id} and reser_shop_date = #{reser_shop_date}
+   
+   ]]>
+   </select>
+   
+<!--메인화면에서 검색기능  -->
+   <select id="searchKeyword" resultType="keyword">
+   <![CDATA[
+   SELECT *
+	FROM bt_keyword
+   ]]>
+   </select>
 </mapper>
