@@ -14,8 +14,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<div class="header" style="height: 40px">
-	<form class="nav" id="form" style="height: 40px; line-height:40px;margin:0;padding:0;" >
+<div class="header">
+	<form class="nav" id="form" style="height: 40px; line-height:40px;margin:0;padding:0;">
 		<div style="display: inline-block; float: left; height: 40px;" >
 		<a href="/thein/main.do">
 			<img src="./resources/main.png" height="40" width="150">
@@ -28,7 +28,7 @@
 			ID <input type = "text" name="user_id">
 			PWD <input type = "password" name="user_pwd">
 			<input type="button" value="로그인" id="login">
-			<input type="button" value="회원가입" id="insert">
+			<input type="button" value="가입" id="insert">
 		</c:when>
 		<c:when test="${sessionScope.uType eq '9999'}">
 <%-- 		<%}else if(session.getAttribute("uType").equals("9999")){ %> --%>

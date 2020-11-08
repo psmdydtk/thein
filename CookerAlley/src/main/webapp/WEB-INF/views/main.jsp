@@ -2,8 +2,7 @@
     pageEncoding="UTF-8"%>
     
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@page import="com.project.thein.vo.CookerVO"%>
-<%@page import=" java.util.Date" %>
+<%-- <%@page import="com.project.thein.vo.CookerVO"%> --%>
 <%@page import="java.util.List"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
@@ -23,9 +22,9 @@
 <title>Insert title here</title>
 </head>
    <script type="text/javascript">
- $('document').ready(function() {
+$('document').ready(function() {
  var area0 = ["시/도 선택","서울특별시","경기도","인천광역시","대전광역시","강원도","충청남도","전라남도","경상북도","경상남도","제주도"];
-  var area1 = ["","마포구","노원구","도봉구","강동구","성동구","서대문구","동대문구","용산구","성북구","광진구","중구"];
+  var area1 = ["마포구","노원구","도봉구","강동구","성동구","서대문구","동대문구","용산구","성북구","광진구","중구"];
    var area2 = ["군포시","부천시","수원시","평택시"];
    var area3 = ["중구","서구"];
    var area4 = ["동구"];
@@ -34,6 +33,8 @@
    var area7 = ["원주시"];
    var area8 = ["포항시"];
    var area9 = ["제주시"];
+
+ 
 
  // 시/도 선택 박스 초기화
 
@@ -44,6 +45,8 @@
   });
   $selsido.next().append("<option value=''>구/군 선택</option>");
  });
+
+ 
 
  // 시/도 선택시 구/군 설정
 
@@ -60,9 +63,10 @@
    });
   }
  });
+
+
 });
 </script>
-
 <body>
 <!------------------------------ main  -->
    <div class="main">
@@ -70,13 +74,13 @@
 <!------------------------------ 검색  -->
 	<div style="display: inline-block; width: 100%">
       <form class="search" action="/thein/search.do" method="GET">
-      	<div style="display: inline-block;" >
-	      	<label for="location">위치 : </label>
-	         <select name="sido1" id="sido1"></select>
-	         <select name="gugun1" id="gugun1" ></select>
-	         <input type="date" name="datepick" id="datepick">
-      	</div>
-      	<div style="display: inline-block;">
+         <div style="display: inline-block;">
+        	 <label for="location">위치 : </label>
+         	 <select name="sido1" id="sido1"></select>
+        	 <select name="gugun1" id="gugun1" ></select>
+        	 <input type="date" name="datepick">
+         </div>
+         <div style="display: inline-block;">
       		<input type="image" value="" src="./resources/search.png" name="submit" value="submit" height="40" width="40" >
       	</div>
       </form>
@@ -85,7 +89,7 @@
       <div class="instar">
          <h3>INSTAR 부분 (3x3)</h3>
          <div class="grid_instar">
-         	<c:forEach items="${json}" var="json">
+            <c:forEach items="${json}" var="json">
          		<div style="border:1px solid red;">
          		<img src="${json.value.src }" width="80px" height="80px"></img>
          		<div style="border:1px solid pink;">
@@ -105,4 +109,5 @@
 <script>
 document.getElementById('datepick').valueAsDate = new Date();
 </script>
+
 </html>

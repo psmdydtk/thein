@@ -4,7 +4,10 @@
 
 <configuration>
 	<typeAliases >
-		<typeAlias type = "com.project.thein.vo.CookerVO" alias = "cooker"/>
+		<typeAlias type = "com.project.thein.vo.UserVO" alias = "user"/>
+		<typeAlias type = "com.project.thein.vo.ShopVO" alias = "shop"/>
+		<typeAlias type = "com.project.thein.vo.ReservationVO" alias = "reser"/>
+		<typeAlias type = "com.project.thein.vo.KeywordVO" alias = "keyword"/>
 	</typeAliases>
 	
 	<mappers>

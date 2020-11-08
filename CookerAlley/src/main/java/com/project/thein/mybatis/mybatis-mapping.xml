@@ -51,8 +51,8 @@
    WHERE shop_id=#{shop}
    ]]>
    </select>
-
-<!--메인화면에서 검색기능  -->
+   
+   <!--메인화면에서 검색기능  -->
    <select id="searchReserTime" resultType="reser">
    <![CDATA[
    SELECT *
@@ -69,4 +69,5 @@
 	FROM bt_keyword
    ]]>
    </select>
+
 </mapper>

@@ -7,6 +7,8 @@
 <!----------------------------- Header  -->
 <head>
 <meta charset="UTF-8">
+<!-- fontawesome -->
+<script src="https://kit.fontawesome.com/8fed18a767.js" crossorigin="anonymous"></script>
 <!-- bootstrap -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <style>
@@ -61,12 +63,12 @@ String datepick = request.getParameter("datepick");
             <c:forEach items="${viewAll }" var="list">
                <tr>
                   <td>
-                     <form id="form${list.shop_id}" action="detail.do?datepick=<%=datepick %>" method="POST">
-                        <table border="1" style="width:900px;margin:3px;padding:10px;">
+                     <form id="form${list.shop_id}" action="detail.do" method="POST">
+                        <table border="1" style="width:500px;margin:3px;padding:10px;">
 						<tr>
 							<td rowspan="6" colspan="4"><img height="300" width="300" src= "https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/e35/s1080x1080/116337329_652158698743520_2370389466736758097_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&_nc_cat=108&_nc_ohc=piCNR4iaLvIAX84XpuQ&_nc_tp=15&oh=143d256b54ba12948884137c9f22b87d&oe=5FCF3F5A"></td>
 							<th colspan="3"><a href="#" id="link${list.shop_id}" style="color:blue">${list.shop_name}</a></th>
-							<td rowspan="2" style="text-align: center;"><img src="./resources/heart.png" height="40" width="40"></td>
+							<td rowspan="2" style="text-align: right;"><i class="heartClick far fa-heart" style="font-size:30px;margin-right:5px;"></i></td>
 						</tr>
 						<tr>
 							<th colspan="3">별점 :      ${list.shop_point}</th>
@@ -82,7 +84,7 @@ String datepick = request.getParameter("datepick");
 						</tr>
 						<tr>
 							<td colspan="4">
-							<input type="button" name="#" value="자세히보기" style="float: right">
+							<input type="button" name="#" value="검색" style="float: right">
 							<c:if test="${sessionScope.uType eq '9999'}">
 								<input type="button" value="수정" onclick="window.location.href='/thein/shopUpdate.do?shop_id=${list.shop_id}'" style="float: right;margin-right:5px;">
 								<a href="/thein/shopUpdate.do?shop_id=${list.shop_id}">이동</a>
@@ -125,4 +127,14 @@ String datepick = request.getParameter("datepick");
 </div>
 </body>
 <%@ include file="Footer.jsp"%>
+<script type="text/javascript">
+$('.heartClick').click(function() {
+   $(this).toggleClass('far fas');
+   if($(this).hasClass('fas')){
+	   //db에 추가하는 기능 //채움 하트 클릭 시 
+   }else{
+	 //db에서 삭제 기능 //빈 하트 클릭 시
+   }
+});
+</script>
 </html>

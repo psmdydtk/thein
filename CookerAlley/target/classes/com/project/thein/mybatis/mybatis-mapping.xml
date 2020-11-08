@@ -3,5 +3,70 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="cooker.mapper">
+<!-- 로그인 -->
+	<select id="loginUser" parameterType="user" resultType="user">
+	<![CDATA[
+	SELECT *
+	FROM bt_user
+	WHERE user_id = #{user_id} AND user_pwd=#{user_pwd}
+	]]>
+	</select>
+<!--메인화면에서 검색기능  -->
+   <select id="search" resultType="shop">
+   <![CDATA[
+   SELECT *
+   FROM bt_shop
+   WHERE shop_location like CONCAT('%',#{loc},'%')
+   ORDER BY shop_name DESC
+   LIMIT #{start},7
+   
+   ]]>
+   </select>
 
+   
+   
+   <!--카운트리스트  -->
+   <select id="countList" resultType="int">
+   <![CDATA[
+   select count(*) 
+   from bt_shop
+   where shop_location like '%'||#{loc}||'%'  
+   ]]>
+   </select>
+
+<!-- 관리자-식당 수정(검색) -->
+	<select id="shopSearch" resultType="shop">
+	<![CDATA[
+	SELECT *
+	FROM bt_shop
+	WHERE shop_id = #{shop_id}
+	]]>
+	</select>
+	
+	    <!--가게 상세보기  -->
+   <select id="searchShop" resultType="shop">
+   <![CDATA[
+   SELECT * 
+   FROM bt_shop 
+   WHERE shop_id=#{shop}
+   ]]>
+   </select>
+
+<!--메인화면에서 검색기능  -->
+   <select id="searchReserTime" resultType="reser">
+   <![CDATA[
+   SELECT *
+   FROM bt_reservation
+   WHERE reser_shop_id = #{reser_shop_id} and reser_shop_date = #{reser_shop_date}
+   
+   ]]>
+   </select>
+   
+<!--메인화면에서 검색기능  -->
+   <select id="searchKeyword" resultType="keyword">
+   <![CDATA[
+   SELECT *
+	FROM bt_keyword
+   ]]>
+   </select>
 </mapper>

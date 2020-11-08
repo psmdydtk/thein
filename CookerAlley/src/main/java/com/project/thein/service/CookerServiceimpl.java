@@ -37,6 +37,11 @@ public class CookerServiceimpl implements CookerService {
 	public UserVO login(UserVO vo){
 		return dao.login(vo);
 	}
+
+	/*
+	 * @Override public ShopVO shopSearch(ShopVO vo) throws Exception { // TODO
+	 * Auto-generated method stub return dao.shopSearch(vo); }
+	 */
 	@Override
 	   public List<ShopVO> searchShop(int shop) throws Exception {
 	      List<ShopVO> list = dao.searchShop(shop);
