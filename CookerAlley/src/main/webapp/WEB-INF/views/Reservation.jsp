@@ -1,3 +1,4 @@
+<%@page import="java.sql.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -9,11 +10,44 @@
    src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <title>Insert title here</title>
 </head>
-<body>
 <%
-String datepick = request.getParameter("datepick");
+String reser_shop_date = request.getParameter("reser_shop_date");
 String reser_shop_id = request.getParameter("shop_id");
+int reser_shop_price =Integer.parseInt(request.getParameter("reser_shop_price"))/2;
+
 %>
+<script type="text/javascript">
+
+function searchTime(){
+   $.ajax({
+      type : "POST",
+      url : "/thein/searchTime.do?datepick="+'<%=reser_shop_date%>'+"&shop_id="+'${reservationVO.reser_shop_id}',
+      data : "",
+      success : function(response){
+         for(var i in response){
+            //console.log(response[i].reser_shop_hour);
+            $("input[name=reser_shop_hour]").each(function() {
+               var a = $(this).val();
+               if(a==response[i].reser_shop_hour){
+                  $(this).attr('disabled',true);
+                  console.log(response[i].reser_shop_hour+"임마 바꾼다잉");
+               }
+               
+            });
+            
+         }   
+         },
+      error:function(request,status,error){
+          alert("error 다 ");
+      }
+
+   });
+}
+</script>
+
+<body onload="searchTime();">
+
+
    <div>
 
       <!------------------------------ 달력 -->
@@ -22,9 +56,14 @@ String reser_shop_id = request.getParameter("shop_id");
          <!------------------------------ 상세예약  -->
          <form class="view" id="form" action="/thein/Reservation.do" method="POST">
 
-            <input type="date" name="reser_shop_date" value="<%=datepick%>">
-
-            <input type="hidden" id="reser_shop_id" value="${list.shop_id }">
+            </select> 
+            <input type="hidden" name="reser_shop_id" value="${reservationVO.reser_shop_id }">
+            <input type="hidden" name="reser_user_id" value="${reservationVO.reser_user_id }">
+             <input type="date" name="reser_shop_date" value="<%=reser_shop_date%>">
+            <input type="hidden" name="reser_shop_price" value ="<%=reser_shop_price %>">
+         <%--    <input type="hidden" name="reser_shop_regi" value="<%=time1 %>"> --%>
+            
+            
             
             <!------------------------------- time  -->
             <div class="container" style="width: 600px;">
@@ -63,41 +102,26 @@ String reser_shop_id = request.getParameter("shop_id");
                </select>
 
                <h1>예약금</h1>
-               <label>메인메뉴가격 /2</label><br> 결제 금액 동의 <input type="checkbox"
-                  id="agree" name="agree"> 동의 안함<input type="checkbox"
-                  id="disAgree" name="disAgree"> <br>
-               <br> <input type="submit" id="gotoPay" sname="gotoPay"
-                  value="결제하러 가기" disable="">
+               <label>예약금은 <h2 style="display: inline"><%=reser_shop_price %></h2>원입니다</label>
+                <br>
+               <br> 
+               결제 금액 동의 <input type="checkbox" id="agree" name="agree">
+                동의 안함<input type="checkbox" id="disAgree" name="disAgree">
+               <br>
+               <br> 
+               <input type="submit" id="gotoPay" sname="gotoPay" value="결제하러 가기" disable="">
 
             </div>
-            </form>
       </div>
-      
+      </form>
    </div>
    
    <br><br>
-   <%--여긴아닙니다 
-   <c:if test="${!empty list}">
-      <table border="1">
-         <tr>
-            <td>가게id</td>
-            <td>날짜</td>
-            <td>시간</td>
-         </tr>
-
-         <c:forEach items="${list}" var="ob">
-            <tr>
-               <td>${ob.name}</td>  <!-- getter가 있어야함 -->
-               <td>${ob.age}</td>
-               <td>${ob.hobby}</td>
-            </tr>
-            </c:forEach>
-      </table>
-
-      
-   </c:if> --%>
 
 </body>
+
+
+
 <script>
    var button_gotoPay = document.getElementById('gotoPay');
    button_gotoPay.disabled = true;
