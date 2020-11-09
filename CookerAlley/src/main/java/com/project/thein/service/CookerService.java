@@ -22,6 +22,8 @@ public interface CookerService {
 	public int insert(ShopVO vo);
 	public int insertReser(ReservationVO vo) throws Exception;
 	public JSONObject insta_crawl()throws Exception;
+	public JSONObject searchHash(String hash)throws Exception;
+	public void getHash()throws Exception;
 
 	
 }

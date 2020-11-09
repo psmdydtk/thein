@@ -82,4 +82,10 @@ public class CookerDaoImpl implements CookerDao {
 	      int insertDao = factory.openSession().insert("cooker.mapper.reservationInsert", vo);
 	      return insertDao;
 	   }
+
+	@Override
+	public List<ShopVO> getHash() throws Exception {
+		List<ShopVO> list = factory.openSession().selectList("cooker.mapper.selectHash");
+		return list;
+	}
 }

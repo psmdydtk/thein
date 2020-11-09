@@ -81,9 +81,7 @@ public class CookerController {
 			@RequestParam(value = "nowPage", required = false) String nowPage,
 			@RequestParam(value = "cntPerPage", required = false) String cntPerPage, Model model) throws Exception {
 		if (loc.equals(" ")) {
-			System.out.println(loc + "찍히니?");
 			loc = sido;
-			System.out.println(loc);
 		}
 		int total = service.countList(loc);
 		if (nowPage == null && cntPerPage == null) {
@@ -220,5 +218,17 @@ public class CookerController {
 		List<ReservationVO> result = service.searchReserTime(rv);
 		md.addAttribute("list",result);
 		return result;
+	}
+	@RequestMapping("hashInsta.do")
+	public String hashInsta(HttpServletRequest request,Model md)throws Exception{
+		String hash = request.getParameter("hash");
+		String shop_id = request.getParameter("shop_id");
+		JSONObject crawl = service.searchHash(hash);
+		md.addAttribute("crawl", crawl);
+		return "hashInsta";
+	}
+	@RequestMapping("getHash.do")
+	public void getHash()throws Exception{
+		service.getHash();
 	}
 }

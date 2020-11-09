@@ -21,9 +21,10 @@ int reser_shop_price =Integer.parseInt(request.getParameter("reser_shop_price"))
 function searchTime(){
    $.ajax({
       type : "POST",
-      url : "/thein/searchTime.do?datepick="+'<%=reser_shop_date%>'+"&shop_id="+'${reservationVO.reser_shop_id}',
+      url : "/thein/searchTime.do?datepick="+'<%=reser_shop_date%>'+"&shop_id="+'${reservationVO.reser_shop_id }',
       data : "",
       success : function(response){
+         //alert("searchTime");
          for(var i in response){
             //console.log(response[i].reser_shop_hour);
             $("input[name=reser_shop_hour]").each(function() {
@@ -156,16 +157,23 @@ function searchTime(){
             }else{
                alert('예약  Success!!');
                console.log(data);
-               location.href="detail";
             }
                
             },
          error:function(data){
-            alert("Error");
+           // alert("Error");
          }
       });
    }
 </script>
 
-
+<script>
+   $('#form').on('submit',function(event){
+      this.submit();
+      event.preventDefault();
+      insertReservation();
+      alert("예약이 완료되었습니다 !");
+      window.close();
+   })
+</script>
 </html>

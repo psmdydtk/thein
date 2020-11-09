@@ -29,13 +29,79 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
 </head>
+<!-- 별점표시하기위한스타일 -->
+<style>
+h2 {font-size:15px;}
+.star-rating {width:304px; }
+.star-rating,.star-rating span {display:inline-block; height:27px; overflow:hidden; background:url(resources/star.png)no-repeat;  }
+.star-rating span{background-position:left bottom; line-height:0; vertical-align:top; }
+</style>
 
-<body>
 <%
 String sido1=request.getParameter("sido1");
 String gugun1 = request.getParameter("gugun1");
 String datepick = request.getParameter("datepick");
 %>
+  <script type="text/javascript">
+$('document').ready(function() {
+ var area0 = ["시/도 선택","서울특별시","경기도","인천광역시","대전광역시","강원도","충청남도","전라남도","경상북도","경상남도","제주도"];
+  var area1 = [" ","마포구","노원구","도봉구","강동구","성동구","서대문구","동대문구","용산구","성북구","광진구","중구"];
+   var area2 = ["군포시","부천시","수원시","평택시"];
+   var area3 = ["중구","서구"];
+   var area4 = ["동구"];
+   var area5 = ["서산"];
+   var area6 = ["여수"];
+   var area7 = ["원주시"];
+   var area8 = ["포항시"];
+   var area9 = ["제주시"];
+
+ // 시/도 선택 박스 초기화
+
+ $("select[name^=sido]").each(function() {
+  $selsido = $(this);
+  $.each(eval(area0), function() {
+   $selsido.append("<option value='"+this+"'>"+this+"</option>");
+  });
+  $selsido.next().append("<option value=''>구/군 선택</option>");
+ });
+
+
+ // 시/도 선택시 구/군 설정
+
+ $("select[name^=sido]").change(function() {
+  var area = "area"+$("option",$(this)).index($("option:selected",$(this))); // 선택지역의 구군 Array
+  var $gugun = $(this).next(); // 선택영역 군구 객체
+  $("option",$gugun).remove(); // 구군 초기화
+
+  if(area == "area0")
+   $gugun.append("<option value='0'>구/군 선택</option>");
+  else {
+   $.each(eval(area), function() {
+    $gugun.append("<option value='"+this+"'>"+this+"</option>");
+   });
+  }
+ });
+
+
+});
+</script>
+<script type="text/javascript">
+/* onload시 초기 시도,군,날짜 셋팅 */
+function doFirst(){
+	$("select[name=sido1]").val("<%=sido1%>");
+	$("select[name=gugun1]").val("<%=sido1%>");
+	$("input[name=datepick]").val("<%=datepick%>");
+}
+</script>
+<body onload="doFirst();">
+
+<div class="wrap-star">
+    <h2>Width="30%"</h2>
+    <div class='star-rating'>
+        <span style ="width:30%"></span>
+    </div>
+</div>
+
 
 <div class="grid_menu">
 <%@ include file="Menu.jsp"%>
@@ -44,17 +110,19 @@ String datepick = request.getParameter("datepick");
    <div class="container">
       <H3>리스트 페이지</H3>
 <!------------------------------ 검색  -->
-      <form class="search" action="/thein/search.do" method="POST">
-         <label for="location">위치 : </label>
-         <select name="loc" id="loc">
-            <option value="gangnam">강남구</option>
-            <option value="jung">중구</option>
-            <option value="mapo">마포구</option>
-            <option value="seodaemon">서대문구</option>
-         </select>
-         <input type="date" name="datepick"  value="<%=datepick %>">
-         <input type="submit" value="검색">
+	<div style="display: inline-block; width: 100%">
+      <form class="search" action="/thein/search.do" method="GET">
+         <div style="display: inline-block;">
+        	 <label for="location">위치 : </label>
+         	 <select name="sido1" id="sido1"></select>
+        	 <select name="gugun1" id="gugun1" ></select>
+        	 <input type="date" name="datepick" id="datepick">
+         </div>
+         <div style="display: inline-block;">
+      		<input type="image" value="" src="./resources/search.png" name="submit" value="submit" height="20" width="20">
+      	</div>
       </form>
+     </div>
 <!------------------------------ list  -->
       <div class="list" >
       <table data-text-content="true">
@@ -67,11 +135,21 @@ String datepick = request.getParameter("datepick");
                         <table style="width:900px;margin:3px;padding:10px;border:1px solid pink">
 						<tr>
 							<td rowspan="6" style="width:300px"><img height="300" width="300" src= "https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/e35/s1080x1080/116337329_652158698743520_2370389466736758097_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&_nc_cat=108&_nc_ohc=piCNR4iaLvIAX84XpuQ&_nc_tp=15&oh=143d256b54ba12948884137c9f22b87d&oe=5FCF3F5A"></td>
-							<th colspan="3"><a href="#" id="link${list.shop_id}" style="color:blue">${list.shop_name}</a></th>
+							<th colspan="3" style="text-align: left;">
+								
+							<a href="#" id="link${list.shop_id}" style="color:blue;font-size:1.5em;">${list.shop_name}</a></th>
 							<td rowspan="2" style="text-align: right;"><i class="heartClick far fa-heart" style="font-size:40px;margin-right:5px;"></i></td>
 						</tr>
 						<tr>
-							<th colspan="3">별점 :      ${list.shop_point}</th>
+							<th colspan="3" style="text-align: left;font-size:1.5em;">별점 :     
+								<div class="wrap-star" style="display: inline-block;">
+								    <div class='star-rating'>
+								        <span id="star"style ="width:${list.shop_point *10 }%"></span>
+								    </div>
+								</div>
+							</th>
+							
+								
 						</tr>
 						<tr>
 							<td colspan="4">골목 :      ${list.shop_street}</td>

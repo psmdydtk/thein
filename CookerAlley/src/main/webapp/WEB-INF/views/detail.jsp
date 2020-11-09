@@ -84,9 +84,9 @@ String reser_shop_price = request.getParameter("reser_shop_price");
 <!------------------------------ hash/button  -->
       <div class="hash">
       <form>
-         <a href="" class="link">#${list.get(0).shop_hash1}</a>
-         <a href="" class="link">#${list.get(0).shop_hash2}</a>
-         <a href="" class="link">#${list.get(0).shop_hash3}</a>
+         <a href="hashInsta?hash=${list.get(0).shop_hash1}&shop_id=${list.get(0).shop_id}" class="link">#${list.get(0).shop_hash1}</a>
+         <a href="hashInsta?hash=${list.get(0).shop_hash2}&shop_id=${list.get(0).shop_id}" class="link">#${list.get(0).shop_hash2}</a>
+         <a href="hashInsta?hash=${list.get(0).shop_hash3}&shop_id=${list.get(0).shop_id}" class="link">#${list.get(0).shop_hash3}</a>
          <input type="button" value="예약" name="gotoReservation" id="gotoReservation">
       </form>
       </div>

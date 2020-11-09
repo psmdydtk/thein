@@ -101,5 +101,11 @@
    VALUES (#{reser_shop_id}, #{reser_user_id}, #{reser_shop_date}, #{reser_shop_hour}, #{reser_shop_person}, #{reser_shop_price}, #{reser_shop_regi},0)
    ]]>
    </select>
-
+	    <!--해시태그뽑기  -->
+   <select id="selectHash" resultType="shop">
+   <![CDATA[
+   SELECT * 
+   FROM bt_shop 
+   ]]>
+   </select>
 </mapper>

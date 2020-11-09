@@ -18,8 +18,9 @@
 <!-- jQuery UI CSS파일  -->
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
 <!-- jQuery UI 라이브러리 js파일 -->
-<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
-<title>Insert title here</title>
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script> 
+<link rel="stylesheet" href="/thein/assets/css/insta_main.css" type="text/css" />  
+<title>골목밥상</title>
 </head>
    <script type="text/javascript">
 $('document').ready(function() {
@@ -86,23 +87,210 @@ $('document').ready(function() {
       </form>
      </div>
 <!------------------------------- instar  -->
-           <div class="instar">
-         <h4>&nbsp;&nbsp; 골목식당 인기게시물</h4>
-         <div class="grid_instar" style="grid-gap: 30px; margin:100px;">
-            <c:forEach items="${crawl}" var="crawl">
-               <div style="border:1px solid gray; width:400px">
-               <img src="${crawl.value.src }" width="100%" height="330px"></img>
-               <div style="width: 100%; text-align:center; font-size:14px;">
-                  <c:forEach items="${crawl.value.tags }" var="tag">
-                     <a>${tag[0]}</a>
-                     <a>${tag[1]}</a>
-                     <a>${tag[2]}</a>
-                  </c:forEach>
-               </div>
-               </div>
-            </c:forEach> 
-         </div>
-      </div>
+      <article class="Instar">
+    <div class="EZdmt">
+        <h2 class="yQ0j1">
+            <div class="Saeqz">
+                인기게시물
+            </div>
+        </h2>
+        <div>
+            <div style="flex-direction: column; padding-bottom:0px; padding-top:0px;">
+                <div class="Nnq7c weEfm"> <!--3개 묶인거-->
+                    <div class="v1Nh3 kIKUG _bz0w"> <!--그 중에 한개-->
+                        <div class="eLAPa">
+                            <div class="KL4Bh">
+                                <img class="FFVAD" alt="" style="object-fit: cover" size="293px" src="${crawl.key0.src}"/>                                
+                            </div>
+                            <div style="width: 100%; text-align:center; font-size:14px;">
+                                <c:forEach items="${crawl.key0.tags }" var="tag">
+                                    <a>${tag[0]}</a>
+                                    <a>${tag[1]}</a>
+                                    <a>${tag[2]}</a>
+                                </c:forEach>                                  
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="v1Nh3 kIKUG _bz0w"> 
+                        <div class="eLAPa">
+                            <div class="KL4Bh">
+                                <img class="FFVAD" alt="" style="object-fit: cover" size="293px" src="${crawl.key1.src}"/>
+                            </div>
+                            <div style="width: 100%; text-align:center; font-size:14px;">
+                                <c:forEach items="${crawl.key1.tags }" var="tag">
+                                    <a>${tag[0]}</a>
+                                    <a>${tag[1]}</a>
+                                    <a>${tag[2]}</a>
+                                </c:forEach>                                  
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="v1Nh3 kIKUG _bz0w"> 
+                        <div class="eLAPa">
+                            <div class="KL4Bh">
+                                <img class="FFVAD" alt="" style="object-fit: cover" size="293px" src="${crawl.key2.src}"/>
+                            </div>
+                            <div style="width: 100%; text-align:center; font-size:14px;">
+                                <c:forEach items="${crawl.key2.tags }" var="tag">
+                                    <a>${tag[0]}</a>
+                                    <a>${tag[1]}</a>
+                                    <a>${tag[2]}</a>
+                                </c:forEach>                                  
+                            </div>
+                        </div>
+                    </div>    
+                </div>    <!--3개 묶음 끝-->
+                
+                
+                <div class="Nnq7c weEfm"> <!--3개 묶인거-->
+                    <div class="v1Nh3 kIKUG _bz0w"> 
+                        <div class="eLAPa">
+                            <div class="KL4Bh">
+                                <img class="FFVAD" alt="" style="object-fit: cover" size="293px" src="${crawl.key3.src}"/>
+                            </div>
+                            <div style="width: 100%; text-align:center; font-size:14px;">
+                                <c:forEach items="${crawl.key3.tags }" var="tag">
+                                    <a>${tag[0]}</a>
+                                    <a>${tag[1]}</a>
+                                    <a>${tag[2]}</a>
+                                </c:forEach>                                  
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="v1Nh3 kIKUG _bz0w"> 
+                        <div class="eLAPa">
+                            <div class="KL4Bh">
+                                <img class="FFVAD" alt="" style="object-fit: cover" size="293px" src="${crawl.key4.src}"/>
+                            </div>
+                            <div style="width: 100%; text-align:center; font-size:14px;">
+                                <c:forEach items="${crawl.key4.tags }" var="tag">
+                                    <a>${tag[0]}</a>
+                                    <a>${tag[1]}</a>
+                                    <a>${tag[2]}</a>
+                                </c:forEach>                                  
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="v1Nh3 kIKUG _bz0w"> 
+                        <div class="eLAPa">
+                            <div class="KL4Bh">
+                                <img class="FFVAD" alt="" style="object-fit: cover" size="293px" src="${crawl.key5.src}"/>
+                            </div>
+                            <div style="width: 100%; text-align:center; font-size:14px;">
+                                <c:forEach items="${crawl.key5.tags }" var="tag">
+                                    <a>${tag[0]}</a>
+                                    <a>${tag[1]}</a>
+                                    <a>${tag[2]}</a>
+                                </c:forEach>                                  
+                            </div>
+                        </div>
+                    </div>   
+                </div>   <!--3개 묶음 끝-->
+
+
+                <div class="Nnq7c weEfm"> <!--3개 묶인거-->
+                    <div class="v1Nh3 kIKUG _bz0w"> 
+                        <div class="eLAPa">
+                            <div class="KL4Bh">
+                                <img class="FFVAD" alt="" style="object-fit: cover" size="293px" src="${crawl.key6.src}"/>
+                            </div>
+                            <div style="width: 100%; text-align:center; font-size:14px;">
+                                <c:forEach items="${crawl.key6.tags }" var="tag">
+                                    <a>${tag[0]}</a>
+                                    <a>${tag[1]}</a>
+                                    <a>${tag[2]}</a>
+                                </c:forEach>                                  
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="v1Nh3 kIKUG _bz0w"> 
+                        <div class="eLAPa">
+                            <div class="KL4Bh">
+                                <img class="FFVAD" alt="" style="object-fit: cover" size="293px" src="${crawl.key7.src}"/>
+                            </div>
+                            <div style="width: 100%; text-align:center; font-size:14px;">
+                                <c:forEach items="${crawl.key7.tags }" var="tag">
+                                    <a>${tag[0]}</a>
+                                    <a>${tag[1]}</a>
+                                    <a>${tag[2]}</a>
+                                </c:forEach>                                  
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="v1Nh3 kIKUG _bz0w"> 
+                        <div class="eLAPa">
+                            <div class="KL4Bh">
+                                <img class="FFVAD" alt="" style="object-fit: cover" size="293px" src="${crawl.key8.src}"/>
+                            </div>
+                            <div style="width: 100%; text-align:center; font-size:14px;">
+                                <c:forEach items="${crawl.key8.tags }" var="tag">
+                                    <a>${tag[0]}</a>
+                                    <a>${tag[1]}</a>
+                                    <a>${tag[2]}</a>
+                                </c:forEach>                                  
+                            </div>
+                        </div>
+                    </div>
+                </div>    <!--3개 묶음 끝-->
+
+
+                <div class="Nnq7c weEfm"> <!--3개 묶인거-->
+                    <div class="v1Nh3 kIKUG _bz0w"> 
+                        <div class="eLAPa">
+                            <div class="KL4Bh">
+                                <img class="FFVAD" alt="" style="object-fit: cover" size="293px" src="${crawl.key9.src}"/>
+                            </div>
+                            <div style="width: 100%; text-align:center; font-size:14px;">
+                                <c:forEach items="${crawl.key9.tags }" var="tag">
+                                    <a>${tag[0]}</a>
+                                    <a>${tag[1]}</a>
+                                    <a>${tag[2]}</a>
+                                </c:forEach>                                  
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="v1Nh3 kIKUG _bz0w"> 
+                        <div class="eLAPa">
+                            <div class="KL4Bh">
+                                <img class="FFVAD" alt="" style="object-fit: cover" size="293px" src="${crawl.key10.src}"/>
+                            </div>
+                            <div style="width: 100%; text-align:center; font-size:14px;">
+                                <c:forEach items="${crawl.key10.tags }" var="tag">
+                                    <a>${tag[0]}</a>
+                                    <a>${tag[1]}</a>
+                                    <a>${tag[2]}</a>
+                                </c:forEach>                                  
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="v1Nh3 kIKUG _bz0w"> 
+                        <div class="eLAPa">
+                            <div class="KL4Bh">
+                                <img class="FFVAD" alt="" style="object-fit: cover" size="293px" src="${crawl.key11.src}"/>
+                            </div>
+                            <div style="width: 100%; text-align:center; font-size:14px;">
+                                <c:forEach items="${crawl.key11.tags }" var="tag">
+                                    <a>${tag[0]}</a>
+                                    <a>${tag[1]}</a>
+                                    <a>${tag[2]}</a>
+                                </c:forEach>                                  
+                            </div>
+                        </div>
+                    </div>
+                </div>    <!--3개 묶음 끝-->
+
+            </div>
+        </div>
+    </div>
+</article>
 
 <!------------------------------- Footer  -->
    </div>

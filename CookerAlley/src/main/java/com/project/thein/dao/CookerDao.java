@@ -19,5 +19,6 @@ public interface CookerDao {
 	public int insert(ShopVO vo);
 	public UserVO info(String id);
 	public int insertReserSuccess(ReservationVO vo)throws Exception;
+	public List<ShopVO> getHash()throws Exception;
 
 }
