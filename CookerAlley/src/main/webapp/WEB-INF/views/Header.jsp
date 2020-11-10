@@ -28,7 +28,7 @@
 			ID <input type = "text" name="user_id">
 			PWD <input type = "password" name="user_pwd">
 			<input type="button" value="로그인" id="login">
-			<input type="button" value="가입" id="insert">
+			<input type="button" value="회원가입" id="register" onclick="location.href='goRegister.do'">
 		</c:when>
 		<c:when test="${sessionScope.uType eq '9999'}">
 <%-- 		<%}else if(session.getAttribute("uType").equals("9999")){ %> --%>

@@ -11,7 +11,21 @@ public class ReservationVO {
          
    
       
-
+   @Override
+public String toString() {
+	return "ReservationVO [reser_id=" + reser_id + ", reser_shop_hour=" + reser_shop_hour + ", reser_shop_person="
+			+ reser_shop_person + ", reser_shop_price=" + reser_shop_price + ", reser_shop_pass=" + reser_shop_pass
+			+ ", reser_shop_id=" + reser_shop_id + ", reser_user_id=" + reser_user_id + ", reser_shop_date="
+			+ reser_shop_date + ", reser_shop_regi=" + reser_shop_regi + ", format1=" + format1 + ", shop_name="
+			+ shop_name + "]";
+}
+private String shop_name;
+   public String getShop_name() {
+         return shop_name;
+      }
+      public void setShop_name(String shop_name) {
+         this.shop_name = shop_name;
+      }
 
    
    public ReservationVO() {
@@ -31,13 +45,7 @@ public class ReservationVO {
    public int getReser_shop_hour() {
       return reser_shop_hour;
    }
-   @Override
-   public String toString() {
-      return "ReservationVO [reser_id=" + reser_id + ", reser_shop_hour=" + reser_shop_hour + ", reser_shop_person="
-            + reser_shop_person + ", reser_shop_price=" + reser_shop_price + ", reser_shop_pass=" + reser_shop_pass
-            + ", reser_shop_id=" + reser_shop_id + ", reser_user_id=" + reser_user_id + ", reser_shop_date="
-            + reser_shop_date + ", reser_shop_regi=" + reser_shop_regi + "]";
-   }
+   
    public void setReser_shop_hour(int reser_shop_hour) {
       this.reser_shop_hour = reser_shop_hour;
    }

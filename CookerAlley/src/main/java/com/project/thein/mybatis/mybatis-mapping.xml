@@ -108,4 +108,39 @@
    FROM bt_shop 
    ]]>
    </select>
+   <!-- 찜 목록 가져오기 -->
+   <select id="heartlist" resultType="Shopones">
+   <![CDATA[
+   SELECT *
+   FROM bt_shop_ones
+   WHERE ones_user_id = #{ones_user_id}
+   ]]>
+   </select>
+   
+   <!-- 예약 목록 가져오기 -->
+   <select id="reservlist" resultType="reser">
+   <![CDATA[
+   SELECT res.*, shop.shop_name
+   FROM bt_reservation res
+   JOIN bt_shop shop
+   ON shop.shop_id=reser_shop_id
+   AND res.reser_user_id = #{reser_user_id}
+   ]]>
+   </select>
+   
+   <!-- 회원가입 -->
+   <select id="register" resultType="int">
+   
+   INSERT INTO 
+   `thein`.`bt_user` (
+   `user_id`,
+   `user_type`,
+   `user_pwd`, 
+   `user_name`, 
+   `user_phone`, 
+   `user_email`,
+   `user_sns_id`) 
+   VALUES (#{user_id},1, #{user_pwd}, #{user_name}, #{user_phone}, #{user_email},#{user_sns_id});
+
+   </select>
 </mapper>

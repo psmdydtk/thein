@@ -8,6 +8,7 @@
 		<typeAlias type = "com.project.thein.vo.ShopVO" alias = "shop"/>
 		<typeAlias type = "com.project.thein.vo.ReservationVO" alias = "reser"/>
 		<typeAlias type = "com.project.thein.vo.KeywordVO" alias = "keyword"/>
+		<typeAlias type = "com.project.thein.vo.ShopOnesVO" alias = "shopones"/>
 	</typeAliases>
 	
 	<mappers>
