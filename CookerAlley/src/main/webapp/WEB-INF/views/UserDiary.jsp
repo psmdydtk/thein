@@ -29,7 +29,6 @@
                   <form id="form${list.ones_shop_id}" action="detail.do?datepick=&shop_id=${list.ones_shop_id}" method="POST">
                      <li>
                         <a href="#" id="link${list.ones_shop_id}">${list.ones_shop_name}</a>
-                        <img src="${list.ones_shop_img}">
                         <a>${list.ones_shop_name}</a>
                      </li>
                      <script type="text/javascript">

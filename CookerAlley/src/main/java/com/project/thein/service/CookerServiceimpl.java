@@ -92,8 +92,8 @@ public class CookerServiceimpl implements CookerService {
 	 */
 	public JSONObject insta_crawl() throws Exception {
 		JSONParser parser = new JSONParser();
-		// Object obj = parser.parse(new FileReader("/home/ghkdldjtjd/git/thein/instagram/crawling.json"));
-		Object obj = parser.parse(new FileReader("C:/instagram/crawling.json"));
+		//Object obj = parser.parse(new FileReader("/home/ghkdldjtjd/git/thein/instagram/crawling.json")); //서버용
+		Object obj = parser.parse(new FileReader("C:/instagram/crawling.json")); //pc용
 		// 파싱한 객체를 jsonobject 에 담는다
 		JSONObject json = (JSONObject) obj;
 		// json데이터를 꺼내오기위한 iterator
@@ -146,8 +146,8 @@ public class CookerServiceimpl implements CookerService {
 	@Override
 	public JSONObject searchHash(String hash) throws Exception {
 		JSONParser parser = new JSONParser();
-		Object obj = parser.parse(new FileReader("/home/ghkdldjtjd/git/thein/instagram/" + hash + ".json"));
-		// Object obj = parser.parse(new FileReader("C:/instagram/crawling.json"));
+		//Object obj = parser.parse(new FileReader("/home/ghkdldjtjd/git/thein/instagram/" + hash + ".json"));
+		 Object obj = parser.parse(new FileReader("C:/instagram/crawling.json"));
 		// 파싱한 객체를 jsonobject 에 담는다
 		JSONObject json = (JSONObject) obj;
 		// json데이터를 꺼내오기위한 iterator

@@ -9,9 +9,12 @@
 <title>해시태그 인스타</title>
 </head>
 <body>
+<%
+String hash = request.getParameter("hash");
+%>
 <!------------------------------- instar  -->
            <div class="instar">
-         <h4>&nbsp;&nbsp; 골목식당 인기게시물</h4>
+         <h4>&nbsp;&nbsp; #<%=hash %>   인스타 게시물</h4>
          <div class="grid_instar" style="grid-gap: 30px; margin:100px;">
             <c:forEach items="${crawl}" var="crawl">
                <div style="border:1px solid gray; width:400px">

@@ -94,15 +94,6 @@ function doFirst(){
 }
 </script>
 <body onload="doFirst();">
-
-<div class="wrap-star">
-    <h2>Width="30%"</h2>
-    <div class='star-rating'>
-        <span style ="width:30%"></span>
-    </div>
-</div>
-
-
 <div class="grid_menu">
 <%@ include file="Menu.jsp"%>
 
@@ -132,16 +123,16 @@ function doFirst(){
                <tr>
                   <td>
                      <form id="form${list.shop_id}" action="detail.do?datepick=<%=datepick %>&shop_id=${list.shop_id}" method="POST">
-                        <table style="width:900px;margin:3px;padding:10px;border:1px solid pink">
+                        <table style="width:900px;margin:3px;padding:10px;border:1px solid balck">
 						<tr>
-							<td rowspan="6" style="width:300px"><img height="300" width="300" src= "https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/e35/s1080x1080/116337329_652158698743520_2370389466736758097_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&_nc_cat=108&_nc_ohc=piCNR4iaLvIAX84XpuQ&_nc_tp=15&oh=143d256b54ba12948884137c9f22b87d&oe=5FCF3F5A"></td>
+							<td rowspan="6" style="width:300px"><img height="300" width="300" src= "${list.shop_img }"></td>
 							<th colspan="3" style="text-align: left;">
 								
-							<a href="#" id="link${list.shop_id}" style="color:blue;font-size:1.5em;">${list.shop_name}</a></th>
+							<a href="#" id="link${list.shop_id}" style="color:blue;font-size:1.8em;">${list.shop_name}</a></th>
 							<td rowspan="2" style="text-align: right;"><i class="heartClick far fa-heart" style="font-size:40px;margin-right:5px;"></i></td>
 						</tr>
 						<tr>
-							<th colspan="3" style="text-align: left;font-size:1.5em;">별점 :     
+							<th colspan="3" style="text-align: left;font-size:1.2em;">별점 :     
 								<div class="wrap-star" style="display: inline-block;">
 								    <div class='star-rating'>
 								        <span id="star"style ="width:${list.shop_point *10 }%"></span>

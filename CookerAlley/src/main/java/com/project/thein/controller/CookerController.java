@@ -52,16 +52,15 @@ public class CookerController {
 	public String loginDo(@ModelAttribute UserVO vo, HttpSession session) throws Exception {
 		// 암호화
 		String pwd = encrypt.Encrypt(vo.getUser_pwd());
-		pwd = encrypt.decAES(pwd);
 		/*
 		 * 복호화 pwd = encrypt.decAES(pwd);
 		 * System.out.println("Controller login.do descAES Called  복호화 한 패스워드 : " +
 		 * pwd);
 		 */
 		vo.setUser_pwd(pwd);
+		// System.out.println("Controller login.do Called!! login id : "+vo.getUser_id());
 		vo = service.login(vo);
-		// System.out.println("Controller login.do Called!! login id : "+vo.getUser_id()
-		// );
+		// 
 		if (vo.getUser_id() != null) {
 			String type = Integer.toString(vo.getUser_type());
 			session.setAttribute("id", vo.getUser_id());
@@ -136,7 +135,7 @@ public class CookerController {
 		int changeName = Integer.parseInt(name);
 		List<ShopVO> list = service.searchShop(changeName);
 		List<KeywordVO> listKeyword = service.searchKeyword(name);
-		System.out.println(listKeyword);
+		System.out.println("Controller.detailCalled!! : listkeyword = \n" + listKeyword);
 		model.addAttribute("list", list);
 		model.addAttribute("keyword", listKeyword);
 		return "detail";// 식당정보(?이름?사진?)클릭시 식당의 전체정보 가져와
@@ -156,7 +155,6 @@ public class CookerController {
 	public String main(Model md) throws Exception {
 		JSONObject crawl = service.insta_crawl();
 		md.addAttribute("crawl", crawl);
-
 		return "main";
 	}
 	/**
@@ -196,7 +194,7 @@ public class CookerController {
 	@GetMapping("goReser.do")
 	public String goReser(ReservationVO vo, Model mv) {
 		mv.addAttribute("reservationVO", vo);
-		System.out.println("CookerController : goRser : vo :" + vo);
+		System.out.println("CookerController. goRser Colled  : vo :" + vo);
 		return "Reservation";
 	}
 
@@ -290,7 +288,6 @@ public class CookerController {
 	public void register(@ModelAttribute UserVO vo, HttpServletResponse response) throws Exception {
 		// 암호화
 		String pwd = encrypt.Encrypt(vo.getUser_pwd());
-		pwd = encrypt.decAES(pwd);
 		vo.setUser_pwd(pwd);
 		
 		int result = service.register(vo);

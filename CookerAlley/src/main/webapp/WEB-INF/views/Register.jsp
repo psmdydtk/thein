@@ -59,7 +59,6 @@ $('#register').click(function(){
 	insertRegister();
 });
    function insertRegister(){
-	   alert("펑션타니");
          var sendData = $('#registerForm').serialize();
             $.ajax({
                type:"POST",
@@ -70,7 +69,7 @@ $('#register').click(function(){
                      alert('가입 Failed'+data);
                   }else{
                      alert('가입  Success!!'+data);
-                     console.log(data);
+                     document.location.href="main.do"
                   	}  
                   },
                error:function(data){

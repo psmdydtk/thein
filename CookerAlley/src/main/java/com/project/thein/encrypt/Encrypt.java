@@ -16,8 +16,6 @@ public class Encrypt{
            
            String str = pwd;
            String encStr = encAES(str);
-           System.out.println(encStr);
-           System.out.println(decAES(encStr));
            
            return encStr;
        }

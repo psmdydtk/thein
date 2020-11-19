@@ -11,6 +11,13 @@
 <script async src="//www.google-analytics.com/analytics.js"></script>
 <title>Insert title here</title>
 </head>
+<!-- 별점표시하기위한스타일 -->
+<style>
+h2 {font-size:15px;}
+.star-rating {width:304px; }
+.star-rating,.star-rating span {display:inline-block; height:27px; overflow:hidden; background:url(resources/star.png)no-repeat;  }
+.star-rating span{background-position:left bottom; line-height:0; vertical-align:top; }
+</style>
 <body>
 <div class="grid_menu">
 <%
@@ -30,16 +37,22 @@ String reser_shop_price = request.getParameter("reser_shop_price");
          <H3>식당 정보</H3>
           <c:forEach items="${list }" var="list">
                 <form id="" action="reservation.do?datepick=<%=datepick %>&shop_id=<%=shop_id %>" method="POST">
-                        <table border="1" style="width:500px;margin:3px;padding:10px;">
+                        <table style="width:600px;margin:3px;padding:10px;border:1px solid black">
                   <tr>
-                     <td rowspan="9" colspan="4">이미지가나올거지롱</td>
-                     <th colspan="3"><a href="#" id="link${list.shop_id}" style="color:blue">${list.shop_name}</a></th>
+                     <td rowspan="9" colspan="4"><img height="300" width="300" src= "${list.shop_img }"></td>
+                     <th colspan="3"><a href="#" id="link${list.shop_id}" style="color:blue; font-size: 18pt;float:left;">${list.shop_name}</a></th>
                      <td rowspan="2" style="text-align: center;">
                         <img src="./resources/heart.png" height="40" width="40">
                      </td>
                   </tr>
                   <tr>
-                     <th colspan="3">별점 :      ${list.shop_point}</th>
+                     <th colspan="3" style="text-align: left;font-size:1.5em;">별점 :     
+								<div class="wrap-star" style="display: inline-block;">
+								    <div class='star-rating'>
+								        <span id="star"style ="width:${list.shop_point *10 }%"></span>
+								    </div>
+								</div>
+					  </th>
                   </tr>
                   <tr>
                      <td colspan="4">골목 :      ${list.shop_street}</td>
@@ -61,7 +74,7 @@ String reser_shop_price = request.getParameter("reser_shop_price");
                   </tr>
                   <tr>
                      <td colspan="4">
-                     <input type="submit" name="#" value="검색" style="float: right">
+                     <input type="button" value="예약" name="gotoReservation" id="gotoReservation" style="float: right">
                      <input type="hidden" id="reser_user_id" value="${sessionScope.id}">
                      <input type="hidden" id="reser_shop_date" value="${datepick }">
                      <input type="hidden" id="reser_shop_id" value="${list.shop_id }">
@@ -84,10 +97,10 @@ String reser_shop_price = request.getParameter("reser_shop_price");
 <!------------------------------ hash/button  -->
       <div class="hash">
       <form>
-         <a href="hashInsta?hash=${list.get(0).shop_hash1}&shop_id=${list.get(0).shop_id}" class="link">#${list.get(0).shop_hash1}</a>
-         <a href="hashInsta?hash=${list.get(0).shop_hash2}&shop_id=${list.get(0).shop_id}" class="link">#${list.get(0).shop_hash2}</a>
-         <a href="hashInsta?hash=${list.get(0).shop_hash3}&shop_id=${list.get(0).shop_id}" class="link">#${list.get(0).shop_hash3}</a>
-         <input type="button" value="예약" name="gotoReservation" id="gotoReservation">
+         <a style="font-weight: bold; font-size: 15pt; color: black" href="hashInsta.do?hash=${list.get(0).shop_hash1}&shop_id=${list.get(0).shop_id}" class="link">#${list.get(0).shop_hash1}</a>
+         <a style="font-weight: bold; font-size: 15pt; color: black" href="hashInsta.do?hash=${list.get(0).shop_hash2}&shop_id=${list.get(0).shop_id}" class="link">#${list.get(0).shop_hash2}</a>
+         <a style="font-weight: bold; font-size: 15pt; color: black" href="hashInsta.do?hash=${list.get(0).shop_hash3}&shop_id=${list.get(0).shop_id}" class="link">#${list.get(0).shop_hash3}</a>
+         
       </form>
       </div>
 <!------------------------------ keyword  -->
