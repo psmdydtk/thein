@@ -130,7 +130,7 @@
    
    <!-- 회원가입 -->
    <select id="register" resultType="int">
-   
+   <![CDATA[
    INSERT INTO 
    `thein`.`bt_user` (
    `user_id`,
@@ -141,6 +141,6 @@
    `user_email`,
    `user_sns_id`) 
    VALUES (#{user_id},1, #{user_pwd}, #{user_name}, #{user_phone}, #{user_email},#{user_sns_id});
-
+   ]]>
    </select>
 </mapper>

@@ -11,7 +11,7 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <meta charset="UTF-8">
 <link href="./assets/css/style.css?ver=<%=i %>" rel="stylesheet" type="text/css">
-<title>Insert title here</title>
+<title>골목밥상</title>
 </head>
 <body>
 <div class="header">
@@ -25,8 +25,8 @@
 		<c:choose>
 <%-- 		<%if(session.getAttribute("uType")==null){ %> --%>
 		<c:when test="${empty sessionScope.uType}">
-			ID <input type = "text" name="user_id">
-			PWD <input type = "password" name="user_pwd">
+			ID <input type = "text" name="user_id" id="user_id">
+			PWD <input type = "password" id="user_pwd" name="user_pwd">
 			<input type="button" value="로그인" id="login">
 			<input type="button" value="회원가입" id="register" onclick="location.href='goRegister.do'">
 		</c:when>
@@ -50,7 +50,40 @@
 </div>
 </body>
 <script>
+//login버튼 클릭시
 $('#login').click(function(){
+	loginCheck();
+	//doLogin();
+});
+//비밀번호에서 엔터키누를때 펑션
+$(document).ready(function(){
+    $("#user_pwd").keypress(function (e) {
+     if (e.which == 13){
+    	 		loginCheck();//id&pwd null Check
+                doLogin();  // 실행할 이벤트
+     }
+ });
+});
+
+//id,pwd null체크
+function loginCheck() {
+	var id = document.getElementById('user_id');
+	var pwd = document.getElementById('user_pwd');
+	if(id.value==""){
+		alert("아이디를 확인하세요");
+		id.focus();
+		return false;
+	}
+	if(pwd.value==""){
+		alert("비밀번호를 확인하세요");
+		pwd.focus();
+		return false;
+	}
+	doLogin();
+}
+
+//login function 
+function doLogin() {
 	$.ajax({
 		type : "POST",
 		url : "/thein/login.do",
@@ -68,6 +101,7 @@ $('#login').click(function(){
 		//	    console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);}
 
 	});
-});
+}
+
 </script>
 </html>

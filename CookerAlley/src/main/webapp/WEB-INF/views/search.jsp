@@ -119,16 +119,17 @@ function doFirst(){
       <table data-text-content="true">
          <tbody>
             <tr><th>검색 결과</th></tr>
+            <tr></tr>
             <c:forEach items="${viewAll }" var="list">
                <tr>
                   <td>
                      <form id="form${list.shop_id}" action="detail.do?datepick=<%=datepick %>&shop_id=${list.shop_id}" method="POST">
-                        <table style="width:900px;margin:3px;padding:10px;border:1px solid balck">
+                        <table style="width:900px;margin:3px;padding:10px;border:1px solid black;">
 						<tr>
 							<td rowspan="6" style="width:300px"><img height="300" width="300" src= "${list.shop_img }"></td>
 							<th colspan="3" style="text-align: left;">
 								
-							<a href="#" id="link${list.shop_id}" style="color:blue;font-size:1.8em;">${list.shop_name}</a></th>
+							<a href="#" id="link${list.shop_id}" style="color:black;font-size:1.8em;">${list.shop_name}</a></th>
 							<td rowspan="2" style="text-align: right;"><i class="heartClick far fa-heart" style="font-size:40px;margin-right:5px;"></i></td>
 						</tr>
 						<tr>

@@ -35,9 +35,7 @@ function searchTime(){
                   $(this).attr('disabled',true);
                   //console.log(response[i].reser_shop_hour+"임마 바꾼다잉");
                }
-               
             });
-            
          }   
          },
       error:function(request,status,error){
@@ -46,95 +44,21 @@ function searchTime(){
 
    });
 }
-function changeTime(e){
-	 var changeTime = $('#reser_shop_date').serialize();
-	 alert("값바뀐거 감지는하냐;")
-	 $("input[name=reser_shop_hour]").each(function() {
-            $(this).attr('disabled',false);
-            //console.log(response[i].reser_shop_hour+"임마 바꾼다잉");
-         });
-	   $.ajax({
-	      type : "POST",
-	      url : "/thein/searchTime.do?datepick="+changeTime+"&shop_id="+'${reservationVO.reser_shop_id }',
-	      data : "",
-	      success : function(response){
-	         //alert("searchTime");
-	         for(var i in response){
-	            //console.log(response[i].reser_shop_hour);
-	            $("input[name=reser_shop_hour]").each(function() {
-	               var a = $(this).val();
-	               if(a==response[i].reser_shop_hour){
-	                  $(this).attr('disabled',true);
-	                  //console.log(response[i].reser_shop_hour+"임마 바꾼다잉");
-	               }
-	               
-	            });
-	            
-	         }   
-	         },
-	      error:function(request,status,error){
-	          alert("error 다 ");
-	      }
-
-	   });
-	}
 </script>
 
-<body onload="searchTime();">
-
-
+<body onload="searchTime();" style="width: 300px;">
    <div>
-
       <!------------------------------ 달력 -->
-      <div class="container" style="width: 400%;">
-         <H2>예약 달력 페이지입니다</H2>
+      <div class="container" >
+         <H2>예약 페이지</H2>
          <!------------------------------ 상세예약  -->
          <form class="view" id="form" action="/thein/Reservation.do" method="POST">
-
-            </select> 
             <input type="hidden" name="reser_shop_id" value="${reservationVO.reser_shop_id }">
             <input type="hidden" id="reser_user_id" name="reser_user_id" value="${sessionScope.id}">
-             <input type="date" id="reser_shop_date" name="reser_shop_date" value="<%=reser_shop_date%>">
-             	<script type="text/javascript">
-	             	$("#reser_shop_date").change(function(){
-	             		var changeTime = $('#reser_shop_date');
-	             		alert("값이바뀌엇다");
-	             		$("input[name=reser_shop_hour]").each(function() {
-		                    $(this).attr('disabled',false);//date초기화작업
-		                 });
-	             		 $.ajax({
-	             		      type : "POST",
-	             		      url : "/thein/searchTime.do?datepick="+changeTime+"&shop_id="+'${reservationVO.reser_shop_id }',
-	             		      data : "",
-	             		      success : function(response){
-	             		         //alert("searchTime");
-	             		         for(var i in response){
-	             		            //console.log(response[i].reser_shop_hour);
-	             		            $("input[name=reser_shop_hour]").each(function() {
-	             		               var a = $(this).val();
-	             		               if(a==response[i].reser_shop_hour){
-	             		                  $(this).attr('disabled',true);
-	             		                  //console.log(response[i].reser_shop_hour+"임마 바꾼다잉");
-	             		               }
-	             		               
-	             		            });
-	             		            
-	             		         }   
-	             		         },
-	             		      error:function(request,status,error){
-	             		          alert("error 다 ");
-	             		      }
-	             		   });
-	             		});
-	             	
-             	</script>
+            <input type="date" id="reser_shop_date" name="reser_shop_date" value="<%=reser_shop_date%>">
             <input type="hidden" name="reser_shop_price" value ="<%=reser_shop_price %>">
-         <%--    <input type="hidden" name="reser_shop_regi" value="<%=time1 %>"> --%>
-            
-            
-            
             <!------------------------------- time  -->
-            <div class="container" style="width: 600px;">
+            <div class="container">
                <h1>시간선택</h1>
                <table>
                   <tr>
@@ -168,7 +92,7 @@ function changeTime(e){
                      <option value=8>8명</option>
                   </optgroup>
                </select>
-
+			
                <h1>예약금</h1>
                <label>예약금은 <h2 style="display: inline"><%=reser_shop_price %></h2>원입니다</label>
                 <br>
@@ -180,25 +104,19 @@ function changeTime(e){
                <input type="submit" id="gotoPay" sname="gotoPay" value="결제하러 가기" disable="">
 
             </div>
+         </form>    
       </div>
-      </form>
    </div>
-   
    <br><br>
-
 </body>
 
-
-
-<script>
+<script type="text/javascript">
    var button_gotoPay = document.getElementById('gotoPay');
    button_gotoPay.disabled = true;
-</script>
-<script type="text/javascript">
    var radio_agree = document.getElementById('agree');
    var button_gotoPay = document.getElementById('gotoPay');
    $("#agree").change(function() {
-      alert("agree 선택!!!");
+      //alert("agree 선택!!!");
       button_gotoPay.disabled = false;
    }
 
@@ -207,13 +125,39 @@ function changeTime(e){
       alert("동의해야만 결제단계로 넘어갈 수 있습니다.");
       button_gotoPay.disabled = true;
    });
-</script>
-<script type="text/javascript">
-   
+
+	$("#reser_shop_date").change(function(){
+		var changeDate = $('#reser_shop_date').val();
+		//alert("값이바뀌엇다" + changeDate);
+		$("input[name=reser_shop_hour]").each(function() {
+           $(this).attr('disabled',false);//date초기화작업
+        });
+		 $.ajax({
+		      type : "POST",
+		      url : "/thein/searchTime.do?datepick="+changeDate+"&shop_id="+encodeURI(${reservationVO.reser_shop_id }),
+		      data : "",
+		      success : function(response){
+		         //alert("searchTime" + response);
+		         for(var i in response){
+		            //console.log(response[i].reser_shop_hour);
+		            $("input[name=reser_shop_hour]").each(function() {
+		               var a = $(this).val();
+		               if(a==response[i].reser_shop_hour){
+		                  $(this).attr('disabled',true);
+		                  //console.log(response[i].reser_shop_hour+"임마 바꾼다잉");
+		               }
+		            });
+		         }   
+		         },
+		      error:function(request,status,error){
+		          alert("error 다 ");
+		      }
+		   });
+		});
    
    function insertReservation(){
       var sendData = $('#form').serialize();
-      
+      //alert(sendData);
       $.ajax({
          type:"POST",
          url:"Reservation.do",
@@ -223,38 +167,41 @@ function changeTime(e){
                alert('예약 Failed');
             }else{
                alert('예약  Success!!');
-               console.log(data);
+              // console.log(data);
             }
                
             },
          error:function(data){
-           // alert("Error");
+            alert("예약실패");
          }
       });
    }
    
    function checkDate(){
 	   var checkDatas = $('#reser_user_id').val();
+	   var checkTimes = $('input[name="reser_shop_hour"]:checked').val();
 	   if(checkDatas==""){
 		   alert("로그인을 해주세요");
 		   return false;
-	   }else{
-		   alert(checkDatas + "승인이된거야");
+	   }else if (checkTimes==null) {
+		    alert("시간을 선택해 주세요");
+			return false;
+			}
+	   else{
+		   //alert(checkDatas + "승인이된거야" + checkTimes);
 		   return true;
 	   }
 	   
    	}
    
-</script>
-
-<script>
    $('#form').on('submit',function(event){
       //this.submit();
       event.preventDefault();
       if(checkDate()){
-      insertReservation();
-      alert("예약이 완료되었습니다 !");
-      window.close();
+    	  this.submit(); 
+       //insertReservation();
+      //alert("예약이 완료되었습니다 !");
+     // window.close(); 
       }
    })
 </script>

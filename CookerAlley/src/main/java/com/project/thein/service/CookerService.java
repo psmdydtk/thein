@@ -42,5 +42,6 @@ public interface CookerService {
 	public List<ReservationVO> reservlist(String id);
 	
 	public int register(UserVO vo) throws Exception;
+	
 
 }

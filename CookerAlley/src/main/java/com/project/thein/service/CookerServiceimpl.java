@@ -1,6 +1,7 @@
 package com.project.thein.service;
 
 import java.io.FileReader;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -9,9 +10,16 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestTemplate;
 
 import com.project.thein.dao.CookerDao;
+import com.project.thein.vo.KakaoPayReadyVO;
 import com.project.thein.vo.KeywordVO;
 import com.project.thein.vo.PagingVO;
 import com.project.thein.vo.ReservationVO;
@@ -256,4 +264,6 @@ public class CookerServiceimpl implements CookerService {
 	      }
 	      return registerSuccess;
 	   }
+
+	
 }

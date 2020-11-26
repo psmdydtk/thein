@@ -34,7 +34,10 @@
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
-	<mvc:resources mapping="/resource/**" location="/resource/"/>
+	
+	
+	<!-- <mvc:annotation-driven/>
+	<mvc:resources mapping="/resource/**" location="/resource/"/> -->
 	
 	<!-- 한글처리 -->
   <filter>

@@ -1,5 +1,7 @@
 package com.project.thein.controller;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Enumeration;
 import java.util.List;
 
@@ -9,17 +11,25 @@ import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.thein.encrypt.Encrypt;
 import com.project.thein.service.CookerService;
+import com.project.thein.vo.KakaoPayReadyVO;
 import com.project.thein.vo.KeywordVO;
 import com.project.thein.vo.PagingVO;
 import com.project.thein.vo.ReservationVO;
@@ -29,6 +39,7 @@ import com.project.thein.vo.UserVO;
 
 @Controller
 public class CookerController {
+
 	private CookerService service;
 	@Autowired
 	private Encrypt encrypt;
@@ -43,8 +54,7 @@ public class CookerController {
 	 * 
 	 * @param vo
 	 * @param session 로그인성공후 세션에 id와 uType(관리자구분용)을 설정한다.
-	 * @return ajax처리용 데이터
-	 * ajax로 데이터 처리를 하며  , 암호화 후 로그인을 한다. 
+	 * @return ajax처리용 데이터 ajax로 데이터 처리를 하며 , 암호화 후 로그인을 한다.
 	 * @throws Exception
 	 */
 	@RequestMapping("login.do")
@@ -58,14 +68,19 @@ public class CookerController {
 		 * pwd);
 		 */
 		vo.setUser_pwd(pwd);
-		// System.out.println("Controller login.do Called!! login id : "+vo.getUser_id());
+		// System.out.println("Controller login.do Called!! login id :
+		// "+vo.getUser_id());
 		vo = service.login(vo);
-		// 
-		if (vo.getUser_id() != null) {
-			String type = Integer.toString(vo.getUser_type());
-			session.setAttribute("id", vo.getUser_id());
-			session.setAttribute("uType", type);
-			return "1";
+		// 로그인실패시
+		if (vo != null) {
+			if (vo.getUser_id() != null) {
+				String type = Integer.toString(vo.getUser_type());
+				session.setAttribute("id", vo.getUser_id());
+				session.setAttribute("uType", type);
+				return "1";
+			} else {
+				return "0";
+			}
 		} else {
 			return "0";
 		}
@@ -147,9 +162,9 @@ public class CookerController {
 		String id = (String) session.getAttribute("id");
 		return new ModelAndView("UserInfo", "info", service.info(id));// id로 회원 전체 정보 가져와
 	}
+
 	/**
-	 * 서버 내부에 저장된 json파일을 데이터 전처리를 한후 뷰단에 뿌려준다.
-	 * main 페이지 
+	 * 서버 내부에 저장된 json파일을 데이터 전처리를 한후 뷰단에 뿌려준다. main 페이지
 	 */
 	@RequestMapping("main.do")
 	public String main(Model md) throws Exception {
@@ -157,22 +172,22 @@ public class CookerController {
 		md.addAttribute("crawl", crawl);
 		return "main";
 	}
+
 	/**
-	 * 미구현기능 
-	 * 가게등록기능이다.
-	 * @return 
+	 * 미구현기능 가게등록기능이다.
+	 * 
+	 * @return
 	 */
 	@RequestMapping("shopInsert.do")
 	public ModelAndView loginPage() {
 		return new ModelAndView("shopInsert");
 	}
+
 	/**
 	 * 
 	 * @param vo
 	 * @return
-	 * @throws Exception
-	 * 미구현기능
-	 * 가게등록 ajax처리 
+	 * @throws Exception 미구현기능 가게등록 ajax처리
 	 */
 	@RequestMapping("insert.do")
 	@ResponseBody
@@ -188,8 +203,7 @@ public class CookerController {
 	 * 
 	 * @param vo
 	 * @param mv
-	 * @return
-	 * 가게 예약페이지
+	 * @return 가게 예약페이지
 	 */
 	@GetMapping("goReser.do")
 	public String goReser(ReservationVO vo, Model mv) {
@@ -198,28 +212,53 @@ public class CookerController {
 		return "Reservation";
 	}
 
-	/**
-	 * 
-	 * @param response : ajax 처리를 위한 객체로 예약성공이면1 아니면 false 리턴
-	 * @param vo
-	 * @throws Exception
-	 * 가게 예약 하는 기능 
+	/**	가게 예약 하는 기능
 	 */
 	@RequestMapping("Reservation.do")
-	@ResponseBody
-	public void reservation(HttpServletResponse response,  ReservationVO vo)throws Exception {
-		int result = service.insertReser(vo);
-		if (result == 1) {
-			// response data로 true를 출력
-			response.getWriter().print(true);
-		} else if (result == 0) {
-			response.getWriter().print(false);
-		}
+	public String reservation(ReservationVO vo) throws Exception {
+		// System.out.println(vo);
+		String reser_shop_price = Integer.toString(vo.getReser_shop_price());
+		String reser_shop_id = vo.getReser_shop_id();
+		String user_id = vo.getReser_user_id();
+		String reser_shop_date = vo.getReser_shop_date();
+		String reser_shop_regi= vo.getReser_shop_regi();
+		int reser_shop_person = vo.getReser_shop_person();
+		int reser_shop_hour = vo.getReser_shop_hour();
+		KakaoPayReadyVO kakaoPayReadyVO;
+		final String HOST = "https://kapi.kakao.com";
+		RestTemplate restTemplate = new RestTemplate();
+
+		// 서버로 요청할 Header
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Authorization", "KakaoAK " + "f736e0e67209f5282c308d50b67bf198");
+		headers.add("Accept", MediaType.APPLICATION_JSON_UTF8_VALUE);
+		headers.add("Content-Type", MediaType.APPLICATION_FORM_URLENCODED_VALUE + ";charset=UTF-8");
+
+		// 서버로 요청할 Body
+		MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
+		params.add("cid", "TC0ONETIME");
+		params.add("partner_order_id", "506889");
+		params.add("partner_user_id", user_id);
+		params.add("item_name", reser_shop_id + "번가게" + reser_shop_date+"일" + reser_shop_hour + "시 예약");// 값가져와서넣기
+		params.add("quantity", "1");
+		params.add("total_amount", reser_shop_price);// 값가져와서넣기
+		params.add("tax_free_amount", "100");
+		params.add("approval_url", "http://localhost:8080/thein/kakaoPaySuccess.do?reser_user_id="+user_id+"&reser_shop_date="+reser_shop_date
+				+"&reser_shop_hour="+reser_shop_hour+"&reser_shop_person="+reser_shop_person+"&reser_shop_price="+reser_shop_price
+				+"&reser_shop_id="+reser_shop_id+"&reser_shop_regi="+reser_shop_regi);
+		params.add("cancel_url", "http://localhost:8080/thein/kakaoPayCancel.do");
+		params.add("fail_url", "http://localhost:8080/thein/kakaoPaySuccessFail.do");
+
+		HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
+		kakaoPayReadyVO = restTemplate.postForObject(new URI(HOST + "/v1/payment/ready"), body, KakaoPayReadyVO.class);
+		return "redirect:" + kakaoPayReadyVO.getNext_redirect_pc_url();
+
 	}
+
 	/**
 	 * 
 	 * @param rv
-	 * @param request :datepick(선택한날짜) , shop_id(가게 고유키) 
+	 * @param request :datepick(선택한날짜) , shop_id(가게 고유키)
 	 * @param md
 	 * @return
 	 * @throws Exception
@@ -237,8 +276,9 @@ public class CookerController {
 		md.addAttribute("list", result);
 		return result;
 	}
+
 	/**
-	 * 해쉬태그별 인스타 크롤링을 하기위한 전처리과정 
+	 * 해쉬태그별 인스타 크롤링을 하기위한 전처리과정
 	 * 
 	 */
 	@RequestMapping("hashInsta.do")
@@ -249,8 +289,9 @@ public class CookerController {
 		md.addAttribute("crawl", crawl);
 		return "hashInsta";
 	}
+
 	/**
-	 * 해쉬태그 데이터  전처리과정 
+	 * 해쉬태그 데이터 전처리과정
 	 */
 	@RequestMapping("getHash.do")
 	public void getHash() throws Exception {
@@ -259,9 +300,8 @@ public class CookerController {
 
 	/**
 	 * 
-	 * @param SOvo bt_shop_ones테이블 VO 
-	 * @param Rvo: bt_reservation 테이블 VO
-	 * 밥상기록 페이지 
+	 * @param SOvo bt_shop_ones테이블 VO
+	 * @param Rvo: bt_reservation 테이블 VO 밥상기록 페이지
 	 */
 	@RequestMapping("UserDiary.do")
 	public String goDiary(Model model, HttpSession session, ShopOnesVO SOvo, ReservationVO Rvo) {
@@ -271,6 +311,7 @@ public class CookerController {
 
 		return "UserDiary";
 	}
+
 	/**
 	 * 회원가입페이지 이동
 	 */
@@ -289,7 +330,7 @@ public class CookerController {
 		// 암호화
 		String pwd = encrypt.Encrypt(vo.getUser_pwd());
 		vo.setUser_pwd(pwd);
-		
+
 		int result = service.register(vo);
 		if (result == 1) {
 			// response data로 true를 출력
@@ -297,6 +338,29 @@ public class CookerController {
 		} else {
 			response.getWriter().print(false);
 		}
+	}
+
+	
+
+	@RequestMapping("kakaoPaySuccess.do")
+	public String suc(HttpServletResponse response, ReservationVO vo) throws Exception {
+		  int result = service.insertReser(vo); 
+		  if (result == 1) {
+			  return "kakaoPaySuccess";
+			  }
+		  else {
+			  return "kakaoPayCancel";
+			}
+	}
+
+	@RequestMapping("kakaoPayCancel.do")
+	public String fail() {
+		return "kakaoPayCancel";
+	}
+
+	@RequestMapping("kakaoPaySuccessFail.do")
+	public String suFail() {
+		return "kakaoPaySuccessFail";
 	}
 	///////////////////////// 관리자 페이지----------------식당 수정
 	/*
