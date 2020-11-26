@@ -22,31 +22,22 @@
          <div>
             <i class="fas fa-grin-hearts"> 찜 목록</i>
             <div style="overflow:auto; width:800px; height:150px;border:1px solid pink">
-            <c:choose>
-               <c:when test="${!empty heartList}">
                <ul>
                   <c:forEach items="${heartList}" var="list">
-                  <form id="form${list.ones_shop_id}" action="detail.do?datepick=&shop_id=${list.ones_shop_id}" method="POST">
+                  <form id="form${list.shop_id}" action="detail.do?datepick=&shop_id=${list.shop_id}" method="POST">
                      <li>
-                        <a href="#" id="link${list.ones_shop_id}">${list.ones_shop_name}</a>
-                        <a>${list.ones_shop_name}</a>
+                        <a href="#" id="link${list.shop_id}">${list.shop_name}</a>
                      </li>
                      <script type="text/javascript">
-                        $( "#link${list.ones_shop_id}" ).click(function() {
-                        alert("${list.ones_shop_id}");
-                        $("#form${list.ones_shop_id}").submit();
+                        $( "#link${list.shop_id}" ).click(function() {
+                        alert("${list.shop_id}");
+                        $("#form${list.shop_id}").submit();
                         });
                      </script>
-                     <input type="hidden" id= "shop_id_${list.ones_shop_id}" name="shop_id_${list.ones_shop_id}" value = "${list.ones_shop_id}"/>
+                     <input type="hidden" id= "shop_id_${list.shop_id}" name="shop_id_${list.shop_id}" value = "${list.shop_id}"/>
                   </form>
-                  </c:forEach>
-                     </ul>
-               </c:when>
-               <c:otherwise>
-                     
-               </c:otherwise> 
-                  
-            </c:choose>
+                 </c:forEach>
+                </ul>
             </div>
                
          </div>

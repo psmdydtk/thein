@@ -3,7 +3,42 @@ package com.project.thein.vo;
 public class ShopVO {
    private String shop_id,shop_name,shop_street,shop_menu1,shop_menu2,shop_menu3;
    private String shop_location,shop_description,shop_img,shop_hash1,shop_hash2,shop_hash3;
-   private int shop_menu1_price,shop_menu2_price,shop_menu3_price;
+   private String ones_id,ones_user_id,ones_shop_id;
+   public String getOnes_id() {
+	return ones_id;
+}
+
+@Override
+public String toString() {
+	return "ShopVO [shop_id=" + shop_id + ", shop_name=" + shop_name + ", shop_street=" + shop_street + ", shop_menu1="
+			+ shop_menu1 + ", shop_menu2=" + shop_menu2 + ", shop_menu3=" + shop_menu3 + ", shop_location="
+			+ shop_location + ", shop_description=" + shop_description + ", shop_img=" + shop_img + ", shop_hash1="
+			+ shop_hash1 + ", shop_hash2=" + shop_hash2 + ", shop_hash3=" + shop_hash3 + ", ones_id=" + ones_id
+			+ ", ones_user_id=" + ones_user_id + ", ones_shop_id=" + ones_shop_id + ", shop_menu1_price="
+			+ shop_menu1_price + ", shop_menu2_price=" + shop_menu2_price + ", shop_menu3_price=" + shop_menu3_price
+			+ ", shop_point=" + shop_point + "]";
+}
+
+public void setOnes_id(String ones_id) {
+	this.ones_id = ones_id;
+}
+
+public String getOnes_user_id() {
+	return ones_user_id;
+}
+
+public void setOnes_user_id(String ones_user_id) {
+	this.ones_user_id = ones_user_id;
+}
+
+public String getOnes_shop_id() {
+	return ones_shop_id;
+}
+
+public void setOnes_shop_id(String ones_shop_id) {
+	this.ones_shop_id = ones_shop_id;
+}
+private int shop_menu1_price,shop_menu2_price,shop_menu3_price;
    private double shop_point;
    
    public ShopVO() {
@@ -106,14 +141,5 @@ public void setShop_id(String shop_id) {
    }
    public void setShop_point(double shop_point) {
       this.shop_point = shop_point;
-   }
-   @Override
-   public String toString() {
-      return "ShopVO [shop_id=" + shop_id + ", shop_name=" + shop_name + ", shop_street=" + shop_street
-            + ", shop_menu1=" + shop_menu1 + ", shop_menu2=" + shop_menu2 + ", shop_menu3=" + shop_menu3
-            + ", shop_location=" + shop_location + ", shop_description=" + shop_description + ", shop_img="
-            + shop_img + ", shop_hash1=" + shop_hash1 + ", shop_hash2=" + shop_hash2 + ", shop_hash3=" + shop_hash3
-            + ", shop_menu1_price=" + shop_menu1_price + ", shop_menu2_price=" + shop_menu2_price
-            + ", shop_menu3_price3=" + shop_menu3_price + ", shop_point=" + shop_point + "]";
    }
 }

@@ -41,6 +41,11 @@ h2 {font-size:15px;}
 String sido1=request.getParameter("sido1");
 String gugun1 = request.getParameter("gugun1");
 String datepick = request.getParameter("datepick");
+Object suser = session.getAttribute("id");
+String user = "";
+if(suser!=null){
+	 user = suser.toString();
+}
 %>
   <script type="text/javascript">
 $('document').ready(function() {
@@ -130,7 +135,14 @@ function doFirst(){
 							<th colspan="3" style="text-align: left;">
 								
 							<a href="#" id="link${list.shop_id}" style="color:black;font-size:1.8em;">${list.shop_name}</a></th>
-							<td rowspan="2" style="text-align: right;"><i class="heartClick far fa-heart" style="font-size:40px;margin-right:5px;"></i></td>
+							<c:choose>
+								<c:when test="${list.ones_id eq null}">
+									<td rowspan="2" style="text-align: right;"><i class="heartClick far fa-heart" style="font-size:40px;margin-right:5px;" value="${list.shop_id }"></i></td>
+								</c:when>
+								<c:otherwise>
+									<td rowspan="2" style="text-align: right;"><i class="heartClick fa-heart fas" style="font-size:40px;margin-right:5px;" value="${list.shop_id }"></i></td>
+								</c:otherwise>
+							</c:choose>
 						</tr>
 						<tr>
 							<th colspan="3" style="text-align: left;font-size:1.2em;">별점 :     
@@ -154,7 +166,7 @@ function doFirst(){
 						</tr>
 						<tr>
 							<td colspan="4">
-							<input type="button" name="#" value="검색" style="float: right">
+							<input type="hidden" name="#" value="검색" style="float: right">
 							<c:if test="${sessionScope.uType eq '9999'}">
 								<input type="button" value="수정" onclick="window.location.href='/thein/shopUpdate.do?shop_id=${list.shop_id}'" style="float: right;margin-right:5px;">
 								<a href="/thein/shopUpdate.do?shop_id=${list.shop_id}">이동</a>
@@ -199,13 +211,49 @@ function doFirst(){
 <%@ include file="Footer.jsp"%>
 <script type="text/javascript">
 $('.heartClick').click(function() {
+	var shop_id= $(this).attr('value');
+	 var check = "<%=user%>";
    $(this).toggleClass('far fas');
    if($(this).hasClass('fas')){
 	   //db에 추가하는 기능 //빈 하트 클릭 시 
-	   alert("뿅♥");
+	  
+	   if(check !=""){
+		    $.ajax({
+			      type : "POST",
+			      url : "/thein/insertHeart.do",
+			      data : "ones_shop_id="+shop_id+"&ones_user_id="+check,
+			      success : function(response){
+			         if(response){
+			        	 alert("찜목록에 추가되었습니다.");
+			         }else{
+			        	 alert("찜목록 등록을 실패하였습니다." + response);
+			         }
+			         },
+			      error:function(request,status,error){
+			          alert("error 발생 ");
+			      }
+			   }); 
+	   }else{
+		   alert("로그인을 해야 사용 가능한 기능입니다.");
+	   }
    }else{
 	 //db에서 삭제 기능 //채움 하트 클릭 시
-	   alert("ㅠㅠ");
+	 $.ajax({
+			      type : "POST",
+			      url : "/thein/deleteHeart.do",
+			      data : "ones_shop_id="+shop_id+"&ones_user_id="+check,
+			      success : function(response){
+			         if(response){
+			        	 alert("찜목록에서 삭제되었습니다.");
+			         }else{
+			        	 alert("찜목록 삭제를 실패하였습니다." + response);
+			         }
+			         },
+			      error:function(request,status,error){
+			          alert("error 발생 ");
+			      }
+			   }); 
+	   
    }
 });
 </script>

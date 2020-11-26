@@ -31,9 +31,13 @@ public interface CookerDao {
 
 	public List<ShopVO> getHash() throws Exception;
 
-	public List<ShopOnesVO> heartlist(String id);
+	public List<ShopVO> heartlist(String id);
 
 	public List<ReservationVO> reservlist(String id);
 	
 	public int register(UserVO vo) throws Exception;
+
+	public int insertHeart(ShopOnesVO sov);
+
+	public int deleteHeart(ShopOnesVO sov);
 }

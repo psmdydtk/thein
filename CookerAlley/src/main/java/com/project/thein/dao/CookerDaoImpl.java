@@ -1,5 +1,6 @@
 package com.project.thein.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -92,9 +93,15 @@ public class CookerDaoImpl implements CookerDao {
 	}
 
 	@Override
-	public List<ShopOnesVO> heartlist(String id) {
+	public List<ShopVO> heartlist(String id) {
 		// TODO Auto-generated method stub
-		return factory.openSession().selectList("cooker.mapper.heartlist", id);
+		List<ShopOnesVO> list = factory.openSession().selectList("cooker.mapper.heartlist", id);
+		List<ShopVO> result = new ArrayList<ShopVO>();
+		for(int i=0; i<list.size(); i++) {
+			List<ShopVO> cast = factory.openSession().selectList("cooker.mapper.getHeart", list.get(i).getOnes_shop_id());
+			result.add(cast.get(0));
+		}
+		return result;
 	}
 
 	@Override
@@ -108,4 +115,16 @@ public class CookerDaoImpl implements CookerDao {
 	      int registerSuccess = factory.openSession().insert("cooker.mapper.register", vo);
 	      return registerSuccess;
 	   }
+
+	@Override
+	public int insertHeart(ShopOnesVO sov) {
+		int result = factory.openSession().insert("cooker.mapper.insertHeart", sov);
+		return result;
+	}
+
+	@Override
+	public int deleteHeart(ShopOnesVO sov) {
+		int result = factory.openSession().insert("cooker.mapper.deleteHeart", sov);
+		return result;
+	}
 }

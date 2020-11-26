@@ -304,7 +304,7 @@ public class CookerController {
 	 * @param Rvo: bt_reservation 테이블 VO 밥상기록 페이지
 	 */
 	@RequestMapping("UserDiary.do")
-	public String goDiary(Model model, HttpSession session, ShopOnesVO SOvo, ReservationVO Rvo) {
+	public String goDiary(Model model, HttpSession session) {
 		String id = (String) session.getAttribute("id");
 		model.addAttribute("heartList", service.heartlist(id));
 		model.addAttribute("reservList", service.reservlist(id));
@@ -361,6 +361,31 @@ public class CookerController {
 	@RequestMapping("kakaoPaySuccessFail.do")
 	public String suFail() {
 		return "kakaoPaySuccessFail";
+	}
+	
+	@RequestMapping("insertHeart.do")
+	@ResponseBody
+	public void insertHeart(ShopOnesVO sov,HttpServletResponse response)throws Exception {
+		int result = service.insertHeart(sov);
+		System.out.println("called insertHeart result = ?? " + result );
+		if (result == 1) {
+			// response data로 true를 출력
+			response.getWriter().print(true);
+		} else {
+			response.getWriter().print(false);
+		}
+	}
+	
+	@RequestMapping("deleteHeart.do")
+	@ResponseBody
+	public void deleteHeart(ShopOnesVO sov,HttpServletResponse response)throws Exception {
+		int result = service.deleteHeart(sov);
+		if (result == 1) {
+			// response data로 true를 출력
+			response.getWriter().print(true);
+		} else {
+			response.getWriter().print(false);
+		}
 	}
 	///////////////////////// 관리자 페이지----------------식당 수정
 	/*

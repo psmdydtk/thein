@@ -14,8 +14,9 @@
 <!--메인화면에서 검색기능  -->
    <select id="search" resultType="shop">
    <![CDATA[
-   SELECT *
-   FROM bt_shop
+   SELECT a.*,b.* 
+   FROM bt_shop a 
+   LEFT OUTER JOIN  bt_shop_ones b ON a.shop_id=b.ones_shop_id
    WHERE shop_location like CONCAT('%',#{loc},'%')
    ORDER BY shop_name DESC
    LIMIT #{start},7
@@ -108,6 +109,17 @@
    FROM bt_shop 
    ]]>
    </select>
+   
+   	    <!-- 찜목록가져오기  -->
+   <select id="getHeart" resultType="shop">
+   <![CDATA[
+   SELECT * 
+   FROM bt_shop 
+   where shop_id=#{shop_id}
+   ]]>
+   </select>
+   
+   
    <!-- 찜 목록 가져오기 -->
    <select id="heartlist" resultType="Shopones">
    <![CDATA[
@@ -141,6 +153,22 @@
    `user_email`,
    `user_sns_id`) 
    VALUES (#{user_id},1, #{user_pwd}, #{user_name}, #{user_phone}, #{user_email},#{user_sns_id});
+   ]]>
+   </select>
+   
+   
+      	    <!-- 찜목록 추가하기  -->
+   <select id="insertHeart" resultType="int">
+   <![CDATA[
+   INSERT INTO `thein`.`bt_shop_ones` (`ones_user_id`, `ones_shop_id`) 
+   VALUES ('${ones_user_id}', '${ones_shop_id}');
+   ]]>
+   </select>
+         	    <!-- 찜목록 삭제하기  -->
+   <select id="deleteHeart" resultType="int">
+   <![CDATA[
+   DELETE FROM `thein`.`bt_shop_ones` 
+   WHERE  ones_user_id='${ones_user_id}' and ones_shop_id = ${ones_shop_id};
    ]]>
    </select>
 </mapper>

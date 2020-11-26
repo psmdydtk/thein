@@ -242,7 +242,7 @@ public class CookerServiceimpl implements CookerService {
 	}
 	//찜목록
 	@Override
-	public List<ShopOnesVO> heartlist(String id) {
+	public List<ShopVO> heartlist(String id) {
 		// TODO Auto-generated method stub
 		return dao.heartlist(id);
 	}
@@ -264,6 +264,18 @@ public class CookerServiceimpl implements CookerService {
 	      }
 	      return registerSuccess;
 	   }
+
+	@Override
+	public int insertHeart(ShopOnesVO sov) {
+		
+		return dao.insertHeart(sov);
+	}
+
+	@Override
+	public int deleteHeart(ShopOnesVO sov) {
+		
+		return dao.deleteHeart(sov);
+	}
 
 	
 }

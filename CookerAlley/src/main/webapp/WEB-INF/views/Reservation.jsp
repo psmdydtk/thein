@@ -19,6 +19,8 @@ if(reser_shop_price<5000){
 }
 %>
 <script type="text/javascript">
+let result = <%=reser_shop_price%>;
+
 
 function searchTime(){
    $.ajax({
@@ -43,6 +45,8 @@ function searchTime(){
       }
 
    });
+   
+   changeSelect();
 }
 </script>
 
@@ -80,7 +84,7 @@ function searchTime(){
                </table>
 
                <h1>인원선택</h1>
-               <select name="reser_shop_person">
+               <select name="reser_shop_person" id="reser_shop_person" onchange="changeSelect()">
                   <optgroup label="인원">
                      <option value=1>1명</option>
                      <option value=2>2명</option>
@@ -92,9 +96,16 @@ function searchTime(){
                      <option value=8>8명</option>
                   </optgroup>
                </select>
-			
+				<script>
+					function changeSelect(){
+   					var person = $('#reser_shop_person').val();
+   					result = result*person ;
+     				$('#price').text(result);	
+     				result = result/person;
+					}
+				</script>
                <h1>예약금</h1>
-               <label>예약금은 <h2 style="display: inline"><%=reser_shop_price %></h2>원입니다</label>
+               <label>예약금은 <h2 id="price" name="price" style="display: inline"></h2>원입니다</label>
                 <br>
                <br> 
                결제 금액 동의 <input type="checkbox" id="agree" name="agree">
