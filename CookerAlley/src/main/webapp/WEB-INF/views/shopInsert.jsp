@@ -23,9 +23,8 @@
 <!------------------------------ main  -->
 	<div class="container">
 		<H3>식당관리페이지</H3>
-	insert form
+	식당추가
 	<form id="form" name="form">
-	<input type="text" name="shop_name1">
 	<div class="row">
 		<div class="col">
 			<label class="label">가게명</label><input type="text" id="shop_name" name="shop_name" >
@@ -75,13 +74,13 @@
 	</div>
 	<div class="row">
 		<div class="col">
-			<label class="label">#</label><input type="text" name="shop_hash1" id="shop_hash1">
+			<label class="label">#해시1</label><input type="text" name="shop_hash1" id="shop_hash1">
 		</div>
 		<div class="col">
-			<label class="label">#</label><input type="text" name="shop_hash2" id="shop_hash2">
+			<label class="label">#해시2</label><input type="text" name="shop_hash2" id="shop_hash2">
 		</div>
 		<div class="col">
-			<label class="label">#</label><input type="text" name="shop_hash3" id="shop_hash3">
+			<label class="label">#해시3</label><input type="text" name="shop_hash3" id="shop_hash3">
 		</div>
 	</div>
 	<div class="row">
@@ -98,9 +97,7 @@
 <%@ include file="Footer.jsp"%>
 <script>
 $('#submit').click(function(){
-	var sendData = $("#form").serialize();
-	alert(sendData +"gg");
-	console.log(sendData);
+	var sendData = $('#form').serialize();
 	doInsert();
 });
 
@@ -122,10 +119,10 @@ $('#submit').click(function(){
 		var shop_hash3 =  $('#shop_hash3').val();
 		   $.ajax({
 		      type : "POST",
-		      url : "insert.do",
+		      url : "/thein/insert.do",
 		      data : {"shop_name":shop_name,"shop_street":shop_street,"shop_menu1":shop_menu1,
 		    	  "shop_menu1_price":shop_menu1_price,"shop_menu2":shop_menu2,"shop_menu2_price":shop_menu2_price,
-		    	  "shop_menu3":shop_menu3,"shop_location":shop_location,"shop_description":shop_description,
+		    	  "shop_menu3":shop_menu3,"shop_menu3_price":shop_menu3_price,"shop_location":shop_location,"shop_description":shop_description,
 		    	  "shop_img":shop_img,"shop_point":shop_point,"shop_hash1":shop_hash1,"shop_hash2":shop_hash2,
 		    	  "shop_hash3":shop_hash3},//{"shop_name":$('#shop_name').val()},//$("#form").serialize(),
 		      success : function(result){

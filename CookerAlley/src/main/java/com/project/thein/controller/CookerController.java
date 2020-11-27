@@ -1,7 +1,7 @@
 package com.project.thein.controller;
 
 import java.net.URI;
-import java.net.URISyntaxException;
+import java.net.InetAddress;
 import java.util.Enumeration;
 import java.util.List;
 
@@ -142,13 +142,21 @@ public class CookerController {
 	public String detail(ShopVO sv, HttpServletRequest request, Model model, ReservationVO rv) throws Exception {
 		Enumeration enumeration = request.getParameterNames();
 		String name = "";
+		String user_id="";
 		while (enumeration.hasMoreElements()) {
 			// name = post한 데이터이다. shop_id_뒤에 어떤값이 올지몰라 이러한 짓을 함.
-			name = (String) enumeration.nextElement();
-			name = name.replace("shop_id_", "");
+			String check =(String) enumeration.nextElement();
+			if(check.contains("shop_id")) {
+				name = check;
+				name = name.replace("shop_id_", "");
+			}else if(check.contains("reser_user_id_")){
+				user_id = check;
+				user_id = user_id.replace("reser_user_id_", "");
+			}
 		}
-		int changeName = Integer.parseInt(name);
-		List<ShopVO> list = service.searchShop(changeName);
+		rv.setReser_shop_id(name);
+		rv.setReser_user_id(user_id);
+		List<ShopVO> list = service.searchShop(rv);
 		List<KeywordVO> listKeyword = service.searchKeyword(name);
 		System.out.println("Controller.detailCalled!! : listkeyword = \n" + listKeyword);
 		model.addAttribute("list", list);
@@ -217,6 +225,10 @@ public class CookerController {
 	@RequestMapping("Reservation.do")
 	public String reservation(ReservationVO vo) throws Exception {
 		// System.out.println(vo);
+		InetAddress ip = InetAddress.getLocalHost();
+		String localhost="http://";
+				localhost+=ip.getHostAddress()+":8080";
+				System.out.println(localhost);
 		String reser_shop_price = Integer.toString(vo.getReser_shop_price());
 		String reser_shop_id = vo.getReser_shop_id();
 		String user_id = vo.getReser_user_id();
@@ -243,11 +255,11 @@ public class CookerController {
 		params.add("quantity", "1");
 		params.add("total_amount", reser_shop_price);// 값가져와서넣기
 		params.add("tax_free_amount", "100");
-		params.add("approval_url", "http://localhost:8080/thein/kakaoPaySuccess.do?reser_user_id="+user_id+"&reser_shop_date="+reser_shop_date
+		params.add("approval_url", localhost+"/thein/kakaoPaySuccess.do?reser_user_id="+user_id+"&reser_shop_date="+reser_shop_date
 				+"&reser_shop_hour="+reser_shop_hour+"&reser_shop_person="+reser_shop_person+"&reser_shop_price="+reser_shop_price
 				+"&reser_shop_id="+reser_shop_id+"&reser_shop_regi="+reser_shop_regi);
-		params.add("cancel_url", "http://localhost:8080/thein/kakaoPayCancel.do");
-		params.add("fail_url", "http://localhost:8080/thein/kakaoPaySuccessFail.do");
+		params.add("cancel_url", localhost+"/thein/kakaoPayCancel.do");
+		params.add("fail_url", localhost+"/thein/kakaoPaySuccessFail.do");
 
 		HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
 		kakaoPayReadyVO = restTemplate.postForObject(new URI(HOST + "/v1/payment/ready"), body, KakaoPayReadyVO.class);
@@ -367,7 +379,7 @@ public class CookerController {
 	@ResponseBody
 	public void insertHeart(ShopOnesVO sov,HttpServletResponse response)throws Exception {
 		int result = service.insertHeart(sov);
-		System.out.println("called insertHeart result = ?? " + result );
+		System.out.println("called insertHeart result =  " + result );
 		if (result == 1) {
 			// response data로 true를 출력
 			response.getWriter().print(true);

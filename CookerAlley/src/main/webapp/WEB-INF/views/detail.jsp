@@ -8,7 +8,16 @@
 <head>
 <meta charset="UTF-8">
 <%@ include file="Header.jsp"%>
+<script src="https://kit.fontawesome.com/8fed18a767.js" crossorigin="anonymous"></script>
 <script async src="//www.google-analytics.com/analytics.js"></script>
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
 </head>
 <!-- 별점표시하기위한스타일 -->
@@ -34,6 +43,13 @@ h2 {
 	vertical-align: top;
 }
 </style>
+<%
+Object suser = session.getAttribute("id");
+String user = "";
+if(suser!=null){
+	 user = suser.toString();
+}
+%>
 <body>
 	<div class="grid_menu">
 		<%
@@ -60,8 +76,14 @@ h2 {
 									src="${list.shop_img }"></td>
 								<th colspan="3"><a href="#" id="link${list.shop_id}"
 									style="color: blue; font-size: 18pt; float: left;">${list.shop_name}</a></th>
-								<td rowspan="2" style="text-align: center;"><img
-									src="./resources/heart.png" height="40" width="40"></td>
+								<c:choose>
+									<c:when test="${list.ones_id eq null}">
+										<td rowspan="2" style="text-align: right;"><i class="heartClick far fa-heart" style="font-size:40px;margin-right:5px;" value="${list.shop_id }"></i></td>
+									</c:when>
+									<c:otherwise>
+										<td rowspan="2" style="text-align: right;"><i class="heartClick fa-heart fas" style="font-size:40px;margin-right:5px;" value="${list.shop_id }"></i></td>
+									</c:otherwise>
+								</c:choose>
 							</tr>
 							<tr>
 								<th colspan="3" style="text-align: left; font-size: 1.5em;">별점
@@ -137,7 +159,7 @@ h2 {
 			<!------------------------------ keyword  -->
 			<div class="keyword">
 				<H3>키워드</H3>
-				<a>#${keyword.get(0).kw_ajt0} #${keyword.get(0).kw_ajt1}
+				<a>#${keyword.get(0).kw_ajt1}
 					#${keyword.get(0).kw_ajt2}</a> <a>#${keyword.get(0).kw_ajt3}
 					#${keyword.get(0).kw_ajt4} #${keyword.get(0).kw_ajt5}</a> <a>#${keyword.get(0).kw_ajt6}
 					#${keyword.get(0).kw_ajt7} #${keyword.get(0).kw_ajt8}</a> <a>#${keyword.get(0).kw_ajt9}
@@ -148,6 +170,58 @@ h2 {
 </body>
 <%@ include file="Footer.jsp"%>
 <script type="text/javascript">
+
+$('.heartClick').click(function() {
+	var shop_id= $(this).attr('value');
+	 var check = "<%=user%>";
+   $(this).toggleClass('far fas');
+   if($(this).hasClass('fas')){
+	   //db에 추가하는 기능 //빈 하트 클릭 시 
+	  
+	   if(check !=""){
+		    $.ajax({
+			      type : "POST",
+			      url : "/thein/insertHeart.do",
+			      data : "ones_shop_id="+shop_id+"&ones_user_id="+check,
+			      success : function(response){
+			         if(response){
+			        	 alert("찜목록에 추가되었습니다.");
+			         }else{
+			        	 alert("찜목록 등록을 실패하였습니다." + response);
+			         }
+			         },
+			      error:function(request,status,error){
+			          alert("error 발생 ");
+			      }
+			   }); 
+	   }else{
+		   alert("로그인을 해야 사용 가능한 기능입니다.");
+		   return true;
+	   }
+   }else{
+	 //db에서 삭제 기능 //채움 하트 클릭 시
+	 if(check !=""){
+		 $.ajax({
+		      type : "POST",
+		      url : "/thein/deleteHeart.do",
+		      data : "ones_shop_id="+shop_id+"&ones_user_id="+check,
+		      success : function(response){
+		         if(response){
+		        	 alert("찜목록에서 삭제되었습니다.");
+		         }else{
+		        	 alert("찜목록 삭제를 실패하였습니다." + response);
+		         }
+		         },
+		      error:function(request,status,error){
+		          alert("error 발생 ");
+		      }
+		   });
+	 }else{
+		 alert("로그인을 해야 사용 가능한 기능입니다");
+	 }
+   }
+});
+
  $("#gotoReservation").click(function() {
 	 if("${sessionScope.id}"==null ){
 		 alert("로그인을 하시고 시도해주세요");

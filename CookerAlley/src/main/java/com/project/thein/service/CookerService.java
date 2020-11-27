@@ -21,7 +21,7 @@ public interface CookerService {
 	public UserVO login(UserVO vo);
 
 	// public ShopVO shopSearch(ShopVO vo)throws Exception;
-	public List<ShopVO> searchShop(int shop) throws Exception;
+	public List<ShopVO> searchShop(ReservationVO rv) throws Exception;
 
 	public List<ReservationVO> searchReserTime(ReservationVO rv) throws Exception;
 

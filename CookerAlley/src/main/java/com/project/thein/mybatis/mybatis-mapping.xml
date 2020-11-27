@@ -46,9 +46,20 @@
 	    <!--가게 상세보기  -->
    <select id="searchShop" resultType="shop">
    <![CDATA[
+   SELECT *
+   FROM (SELECT * from bt_shop a  WHERE a.shop_id= #{reser_shop_id} ) t
+   LEFT OUTER JOIN  bt_shop_ones b ON ones_user_id = #{reser_user_id} 
+   AND ones_shop_id = #{reser_shop_id}
+   
+   ]]>
+   </select>
+   
+       <!--가게 상세보기  -->
+   <select id="searchShopnoLogin" resultType="shop">
+   <![CDATA[
    SELECT * 
    FROM bt_shop 
-   WHERE shop_id=#{shop}
+   WHERE shop_id=#{reser_shop_id}  
    ]]>
    </select>
    

@@ -87,8 +87,8 @@ $('document').ready(function() {
       </form>
      </div>
 <!------------------------------- instar  -->
-		<div class="instar" style="width:100%">
-         <h3>골목식당 해시태그 검색(인스타)</h3>
+		<div class="instar">
+         <h3 style="text-align:center;">골목식당 해시태그 검색(인스타)</h3>
          <div class="grid_instar">
          	<c:forEach var="list" items="${crawl}">
          		<div style="border:1px solid black ;max-height: 100%; width: 100%;">
@@ -101,7 +101,7 @@ $('document').ready(function() {
          	</c:forEach>
             
          </div>
-      </div>
+     	 </div>
 <!------------------------------- Footer  -->
    </div>
 </body>

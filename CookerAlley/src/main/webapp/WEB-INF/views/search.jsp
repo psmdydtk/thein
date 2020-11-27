@@ -89,8 +89,6 @@ $('document').ready(function() {
 
 
 });
-</script>
-<script type="text/javascript">
 /* onload시 초기 시도,군,날짜 셋팅 */
 function doFirst(){
 	$("select[name=sido1]").val("<%=sido1%>");
@@ -106,7 +104,7 @@ function doFirst(){
    <div class="container">
       <H3>리스트 페이지</H3>
 <!------------------------------ 검색  -->
-	<div style="display: inline-block; width: 100%">
+	<div style="width:100%;display: inline-block; ">
       <form class="search" action="/thein/search.do" method="GET">
          <div style="display: inline-block;">
         	 <label for="location">위치 : </label>
@@ -129,7 +127,7 @@ function doFirst(){
                <tr>
                   <td>
                      <form id="form${list.shop_id}" action="detail.do?datepick=<%=datepick %>&shop_id=${list.shop_id}" method="POST">
-                        <table style="width:900px;margin:3px;padding:10px;border:1px solid black;">
+                        <table style="width:95%;margin:15px;padding:10px;border:1px solid black;">
 						<tr>
 							<td rowspan="6" style="width:300px"><img height="300" width="300" src= "${list.shop_img }"></td>
 							<th colspan="3" style="text-align: left;">
@@ -145,7 +143,7 @@ function doFirst(){
 							</c:choose>
 						</tr>
 						<tr>
-							<th colspan="3" style="text-align: left;font-size:1.2em;">별점 :     
+							<th colspan="3" style="text-align: left;font-size:1.2em;">별점 :${list.shop_point }     
 								<div class="wrap-star" style="display: inline-block;">
 								    <div class='star-rating'>
 								        <span id="star"style ="width:${list.shop_point *10 }%"></span>
@@ -175,6 +173,7 @@ function doFirst(){
 						</tr>
 						</table>
                         <input type="hidden" id= "shop_id_${list.shop_id}" name="shop_id_${list.shop_id}" value = "${list.shop_id}"/>
+                        <input type="hidden" id= "reser_user_id_<%=user%>" name="reser_user_id_<%=user%>" value = "<%=user%>"/>
                      </form>
                   </td>
                   <script type="text/javascript">
@@ -238,21 +237,26 @@ $('.heartClick').click(function() {
 	   }
    }else{
 	 //db에서 삭제 기능 //채움 하트 클릭 시
-	 $.ajax({
-			      type : "POST",
-			      url : "/thein/deleteHeart.do",
-			      data : "ones_shop_id="+shop_id+"&ones_user_id="+check,
-			      success : function(response){
-			         if(response){
-			        	 alert("찜목록에서 삭제되었습니다.");
-			         }else{
-			        	 alert("찜목록 삭제를 실패하였습니다." + response);
-			         }
-			         },
-			      error:function(request,status,error){
-			          alert("error 발생 ");
-			      }
-			   }); 
+	 if(check != ""){
+		 $.ajax({
+		      type : "POST",
+		      url : "/thein/deleteHeart.do",
+		      data : "ones_shop_id="+shop_id+"&ones_user_id="+check,
+		      success : function(response){
+		         if(response){
+		        	 alert("찜목록에서 삭제되었습니다.");
+		         }else{
+		        	 alert("찜목록 삭제를 실패하였습니다." + response);
+		         }
+		         },
+		      error:function(request,status,error){
+		          alert("error 발생 ");
+		      }
+		   });
+	 }
+	 else{
+		   alert("로그인을 해야 사용 가능한 기능입니다.");	 
+	 }
 	   
    }
 });

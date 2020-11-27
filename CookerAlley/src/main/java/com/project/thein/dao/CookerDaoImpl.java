@@ -46,8 +46,8 @@ public class CookerDaoImpl implements CookerDao {
 	 */
 
 	@Override
-	public List<ShopVO> searchShop(int shop) throws Exception {
-		List<ShopVO> list = factory.openSession().selectList("cooker.mapper.searchShop", shop);
+	public List<ShopVO> searchShop(ReservationVO rv) throws Exception {
+		List<ShopVO> list = factory.openSession().selectList("cooker.mapper.searchShop", rv);
 		System.out.println(list);
 		return list;
 	}
@@ -67,7 +67,7 @@ public class CookerDaoImpl implements CookerDao {
 	@Override
 	public int insert(ShopVO vo) {
 		// TODO Auto-generated method stub
-		int result = factory.openSession().selectOne("cooker.mapper.insertShop", vo);
+		int result = factory.openSession().insert("cooker.mapper.insertShop", vo);
 		return result;
 
 	}
@@ -126,5 +126,12 @@ public class CookerDaoImpl implements CookerDao {
 	public int deleteHeart(ShopOnesVO sov) {
 		int result = factory.openSession().insert("cooker.mapper.deleteHeart", sov);
 		return result;
+	}
+
+	@Override
+	public List<ShopVO> searchShopnoLogin(ReservationVO rv) {
+		List<ShopVO> list = factory.openSession().selectList("cooker.mapper.searchShopnoLogin", rv);
+		System.out.println(list);
+		return list;
 	}
 }

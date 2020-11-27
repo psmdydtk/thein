@@ -14,7 +14,7 @@
 <title>골목밥상</title>
 </head>
 <body>
-<div class="header">
+<div class="header" style="background-color:white">
 	<form class="nav" id="form" style="height: 40px; line-height:40px;margin:0;padding:0;">
 		<div style="display: inline-block; float: left; height: 40px;" >
 		<a href="/thein/main.do">
