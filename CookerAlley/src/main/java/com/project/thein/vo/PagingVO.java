@@ -10,7 +10,7 @@ public class PagingVO {
       public void setLoc(String loc) {
          this.loc = loc;
       }
-      private int cntPage = 5;
+      private int cntPage = 7;//한화면에 보여주고싶은 페이지
       public PagingVO() {
          super();
       }

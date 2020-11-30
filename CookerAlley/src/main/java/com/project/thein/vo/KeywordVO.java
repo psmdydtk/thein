@@ -1,13 +1,7 @@
 package com.project.thein.vo;
 
 public class KeywordVO {
-	private String kw_ajt0,kw_ajt1,kw_ajt2,kw_ajt3,kw_ajt4,kw_ajt5,kw_ajt6,kw_ajt7,kw_ajt8,kw_ajt9,kw_ajt10,kw_shop_id;
-	public String getKw_ajt0() {
-		return kw_ajt0;
-	}
-	public void setKw_ajt0(String kw_ajt0) {
-		this.kw_ajt0 = kw_ajt0;
-	}
+	private String kw_ajt1,kw_ajt2,kw_ajt3,kw_ajt4,kw_ajt5,kw_ajt6,kw_ajt7,kw_ajt8,kw_ajt9,kw_ajt10,kw_shop_id;
 	private int kw_id;
 	
 	public KeywordVO() {
@@ -16,19 +10,6 @@ public class KeywordVO {
 	}
 	public String getKw_ajt1() {
 		return kw_ajt1;
-	}
-	@Override
-	public String toString() {
-		return "KeywordVO [kw_ajt0=" + kw_ajt0 + ", kw_ajt1=" + kw_ajt1 + ", kw_ajt2=" + kw_ajt2 + ", kw_ajt3="
-				+ kw_ajt3 + ", kw_ajt4=" + kw_ajt4 + ", kw_ajt5=" + kw_ajt5 + ", kw_ajt6=" + kw_ajt6 + ", kw_ajt7="
-				+ kw_ajt7 + ", kw_ajt8=" + kw_ajt8 + ", kw_ajt9=" + kw_ajt9 + ", kw_ajt10=" + kw_ajt10 + ", kw_shop_id="
-				+ kw_shop_id + ", kw_id=" + kw_id + ", getKw_ajt0()=" + getKw_ajt0() + ", getKw_ajt1()=" + getKw_ajt1()
-				+ ", getKw_ajt2()=" + getKw_ajt2() + ", getKw_ajt3()=" + getKw_ajt3() + ", getKw_ajt4()=" + getKw_ajt4()
-				+ ", getKw_ajt5()=" + getKw_ajt5() + ", getKw_ajt6()=" + getKw_ajt6() + ", getKw_ajt7()=" + getKw_ajt7()
-				+ ", getKw_ajt8()=" + getKw_ajt8() + ", getKw_ajt9()=" + getKw_ajt9() + ", getKw_ajt10()="
-				+ getKw_ajt10() + ", getKw_id()=" + getKw_id() + ", getKw_shop_id()=" + getKw_shop_id()
-				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
-				+ "]";
 	}
 	public void setKw_ajt1(String kw_ajt1) {
 		this.kw_ajt1 = kw_ajt1;
@@ -98,6 +79,13 @@ public class KeywordVO {
 	}
 	public void setKw_shop_id(String kw_shop_id) {
 		this.kw_shop_id = kw_shop_id;
+	}
+	@Override
+	public String toString() {
+		return "KeywordVO [kw_ajt1=" + kw_ajt1 + ", kw_ajt2=" + kw_ajt2 + ", kw_ajt3=" + kw_ajt3 + ", kw_ajt4="
+				+ kw_ajt4 + ", kw_ajt5=" + kw_ajt5 + ", kw_ajt6=" + kw_ajt6 + ", kw_ajt7=" + kw_ajt7 + ", kw_ajt8="
+				+ kw_ajt8 + ", kw_ajt9=" + kw_ajt9 + ", kw_ajt10=" + kw_ajt10 + ", kw_shop_id=" + kw_shop_id
+				+ ", kw_id=" + kw_id + "]";
 	}
 	
 }
