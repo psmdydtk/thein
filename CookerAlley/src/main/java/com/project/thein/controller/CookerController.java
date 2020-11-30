@@ -228,7 +228,6 @@ public class CookerController {
 		InetAddress ip = InetAddress.getLocalHost();
 		String localhost="http://";
 				localhost+=ip.getHostAddress()+":8080";
-				System.out.println(localhost);
 		String reser_shop_price = Integer.toString(vo.getReser_shop_price());
 		String reser_shop_id = vo.getReser_shop_id();
 		String user_id = vo.getReser_user_id();
@@ -255,11 +254,11 @@ public class CookerController {
 		params.add("quantity", "1");
 		params.add("total_amount", reser_shop_price);// 값가져와서넣기
 		params.add("tax_free_amount", "100");
-		params.add("approval_url", localhost+"/thein/kakaoPaySuccess.do?reser_user_id="+user_id+"&reser_shop_date="+reser_shop_date
+		params.add("approval_url", "http://localhost:8080/thein/kakaoPaySuccess.do?reser_user_id="+user_id+"&reser_shop_date="+reser_shop_date
 				+"&reser_shop_hour="+reser_shop_hour+"&reser_shop_person="+reser_shop_person+"&reser_shop_price="+reser_shop_price
 				+"&reser_shop_id="+reser_shop_id+"&reser_shop_regi="+reser_shop_regi);
-		params.add("cancel_url", localhost+"/thein/kakaoPayCancel.do");
-		params.add("fail_url", localhost+"/thein/kakaoPaySuccessFail.do");
+		params.add("cancel_url", "http://localhost:8080/thein/kakaoPayCancel.do");
+		params.add("fail_url", "http://localhost:8080/thein/kakaoPaySuccessFail.do");
 
 		HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
 		kakaoPayReadyVO = restTemplate.postForObject(new URI(HOST + "/v1/payment/ready"), body, KakaoPayReadyVO.class);

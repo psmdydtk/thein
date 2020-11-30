@@ -1,5 +1,6 @@
 package com.project.thein.service;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.net.URI;
 import java.util.ArrayList;
@@ -106,8 +107,14 @@ public class CookerServiceimpl implements CookerService {
 	 */
 	public JSONObject insta_crawl() throws Exception {
 		JSONParser parser = new JSONParser();
-		Object obj = parser.parse(new FileReader("/home/ghkdldjtjd/git/thein/instagram/crawling.json")); //서버용
-		//Object obj = parser.parse(new FileReader("C:/instagram/crawling.json")); //pc용
+		Object obj;
+		try{
+			 obj = parser.parse(new FileReader("/home/ghkdldjtjd/git/thein/instagram/crawling.json")); //서버용
+		}
+		catch(FileNotFoundException e){
+			System.out.println("로컬PC 경로로 변경");
+			 obj = parser.parse(new FileReader("C:/instagram/crawling.json")); //pc용
+		}
 		// 파싱한 객체를 jsonobject 에 담는다
 		JSONObject json = (JSONObject) obj;
 		// json데이터를 꺼내오기위한 iterator
@@ -160,8 +167,13 @@ public class CookerServiceimpl implements CookerService {
 	@Override
 	public JSONObject searchHash(String hash) throws Exception {
 		JSONParser parser = new JSONParser();
-		Object obj = parser.parse(new FileReader("/home/ghkdldjtjd/git/thein/instagram/" + hash + ".json"));
-		 //Object obj = parser.parse(new FileReader("C:/instagram/"+ hash + ".json"));
+		Object obj;
+		try{
+			obj = parser.parse(new FileReader("/home/ghkdldjtjd/git/thein/instagram/" + hash + ".json"));
+		}catch(FileNotFoundException e) {
+			System.out.println("로컬PC 경로로 변경");
+			obj = parser.parse(new FileReader("C:/instagram/"+ hash + ".json"));
+		}
 		// 파싱한 객체를 jsonobject 에 담는다
 		JSONObject json = (JSONObject) obj;
 		// json데이터를 꺼내오기위한 iterator
